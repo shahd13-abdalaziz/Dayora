@@ -1,4 +1,4 @@
-# FocusFlow 
+# FocusFlow 💫
 
 ### Smart Productivity & Study Planner
 
