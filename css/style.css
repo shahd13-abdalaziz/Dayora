@@ -1,1 +1,184 @@
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e1eedd;
+  color: #2d4a37;
+  padding: 30px 60px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+
+.btn {
+  display: inline-block;
+  background-color: #5b8f65;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background-color: #4a7a54;
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4f9f2;
+  padding: 15px 30px;
+  border-radius: 25px;
+}
+
+.logo {
+  color: #1e4a2e;
+  font-size: 30px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-links a:hover {
+  color: #5b8f65;
+}
+
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.hero-text {
+  width: 50%;
+}
+
+.tags {
+  display: inline-block;
+  background-color: #cfe3cc;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: 70px;
+  color: #1e4a2e;
+  line-height: 1.1;
+}
+
+.hero .green {
+  color: #5b8f5f;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.hero-image {
+  width: 45%;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 40px;
+}
+
+/* ===== الكروت ===== */
+.features {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  flex: 1;
+  background-color: #f4f9f2;
+  padding: 25px;
+  border-radius: 20px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.icon {
+  width: 55px;
+  height: 55px;
+  background-color: #d3e5d0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  color: #1e4a2e;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #6b8472;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.arrow {
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+  text-align: center;
+  background-color: #d3e5d0;
+  border-radius: 50%;
+}
+
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  padding: 0 30px;
+}
+
+.bottom-text h2 {
+  color: #1e4a2e;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.bottom-text p {
+  color: #6b8472;
+  line-height: 1.6;
+  max-width: 450px;
+}
+
+.perks {
+  display: flex;
+  gap: 40px;
+}
