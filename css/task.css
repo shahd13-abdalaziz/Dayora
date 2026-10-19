@@ -1,0 +1,141 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background: #f4f2fb;
+    color: #1f1b3a;
+    padding: 24px;
+
+    display: flex;
+    gap: 24px;
+    min-height: 100vh;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    background: #1f4a33;
+    border-radius: 16px;
+    padding: 24px 16px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.logo img {
+    width: 30px;
+    height: 30px;
+}
+
+.menu {
+    flex: 1;                  /* ياخد المساحة الفاضية فيزق Log Out لتحت */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    color: #cfe3cf;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.menu-link img {
+    width: 20px;
+    height: 20px;
+}
+
+.menu-link:hover {
+    background: #2e5f44;
+}
+
+.active {
+    background: #eaf2e7;      /* الصفحة الحالية */
+    color: #1f4a33;
+}
+
+.active:hover {
+    background: #eaf2e7;
+}
+
+
+main {
+    flex: 1;
+}
+
+
+.todo {
+    width: 340px;
+    background: #fde2e4;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.todo h2 {
+    font-size: 17px;
+    color: #b4233a;
+}
+
+
+.high,
+.medium,
+.low {
+    position: relative;
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 4px rgba(40, 30, 90, .08);
+}
+
+.todo h3 {
+    font-size: 15px;
+    margin-bottom: 12px;
+    padding-right: 24px;
+}
+
+.todo button {
+    border: none;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.high button   { background: #fecdd3; color: #be123c; }
+.medium button { background: #fde7b0; color: #9a6200; }
+.low button    { background: #c8f1e4; color: #0f766e; }
+
+.todo img {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
