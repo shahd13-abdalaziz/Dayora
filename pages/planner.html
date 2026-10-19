@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dayora</title>
+  <link rel="stylesheet" href="../css/planner.css">
+</head>
+<body>
 
+  <div class="app">
+
+    <!-- ========== الشريط الأخضر اللي على الجنب ========== -->
+    <div class="sidebar">
+
+      <div class="logo">
+        <img src="https://api.iconify.design/lucide/sprout.svg?color=%23ffffff" alt="logo">
+        <span>Dayora</span>
+      </div>
+
+      <div class="menu">
+        <a href="dashboard.html" class="menu-link">
+          <img src="https://api.iconify.design/lucide/layout-dashboard.svg?color=%23cfe3cf" alt="">
+          Dashboard
+        </a>
+        <a href="tasks.html" class="menu-link">
+          <img src="https://api.iconify.design/lucide/list-checks.svg?color=%23cfe3cf" alt="">
+          Tasks
+        </a>
+        <!-- الصفحة الحالية: معاها كلاس active -->
+        <a href="planner.html" class="menu-link active">
+          <img src="https://api.iconify.design/lucide/calendar.svg?color=%231f4a33" alt="">
+          Planner
+        </a>
+        <a href="focus.html" class="menu-link">
+          <img src="https://api.iconify.design/lucide/timer.svg?color=%23cfe3cf" alt="">
+          Focus Room
+        </a>
+        <a href="analytics.html" class="menu-link">
+          <img src="https://api.iconify.design/lucide/activity.svg?color=%23cfe3cf" alt="">
+          Analytics
+        </a>
+        <a href="settings.html" class="menu-link">
+          <img src="https://api.iconify.design/lucide/settings.svg?color=%23cfe3cf" alt="">
+          Settings
+        </a>
+      </div>
+
+      <a href="../index.html" class="menu-link">
+        <img src="https://api.iconify.design/lucide/log-out.svg?color=%23cfe3cf" alt="">
+        Log Out
+      </a>
+
+    </div>
+
+    <!-- ========== الجزء الرئيسي (كروت الملخص) ========== -->
+    <div class="main">
+
+      <div class="stats">
+
+        <div class="stat-card">
+          <div class="icon"><img src="https://api.iconify.design/lucide/clock.svg?color=%232e5f44" alt="clock"></div>
+          <div>
+            <h3>Planned this week</h3>
+            <p class="number">25 hrs</p>
+            <p class="note">across 7 days</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="icon"><img src="https://api.iconify.design/lucide/calendar.svg?color=%232e5f44" alt="calendar"></div>
+          <div>
+            <h3>Sessions</h3>
+            <p class="number">17</p>
+            <p class="note">study and project blocks</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="icon"><img src="https://api.iconify.design/lucide/list-checks.svg?color=%232e5f44" alt="tasks"></div>
+          <div>
+            <h3>Tasks to schedule</h3>
+            <p class="number">3</p>
+            <p class="note">waiting for a slot</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="icon"><img src="https://api.iconify.design/lucide/sprout.svg?color=%232e5f44" alt="streak"></div>
+          <div>
+            <h3>Focus streak</h3>
+            <p class="number">6 days</p>
+            <p class="note">keep it going</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

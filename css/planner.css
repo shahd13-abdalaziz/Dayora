@@ -1,0 +1,134 @@
+body {
+  margin: 0;
+  background: #eaf2e7;
+  font-family: Arial, sans-serif;
+  color: #1f4a33;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: #1f4a33;
+  padding: 24px 16px;
+
+  display: flex;
+  flex-direction: column;  
+  gap: 28px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 8px;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.logo img {
+  width: 30px;
+  height: 30px;
+}
+
+.menu {
+  flex: 1;                  /* ياخد المساحة الفاضية فيزق Log Out لتحت */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #cfe3cf;
+  text-decoration: none;    /* يشيل الخط اللي تحت اللينك */
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.menu-link img {
+  width: 20px;
+  height: 20px;
+}
+
+.menu-link:hover {
+  background: #2e5f44;      /* لما الماوس يعدي عليه */
+}
+
+.active {
+  background: #eaf2e7;      /* الصفحة الحالية */
+  color: #1f4a33;
+}
+
+/* ========== الجزء الرئيسي ========== */
+.main {
+  flex: 1;
+  padding: 20px 28px;
+}
+
+/* ========== كروت الملخص ========== */
+.stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  flex:1 1 200px;
+  background: #f4f8f1;
+  border: 1px solid #d3e1cf;
+  border-radius: 16px;
+  padding: 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #dbe9d6;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.stat-card h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #5d6f62;
+}
+
+.number {
+  margin: 6px 0;
+  font-size: 26px;
+  font-weight: bold;
+  color: #1f4a33;
+}
+
+.note {
+  margin: 0;
+  font-size: 12px;
+  color: #5d6f62;
+}
+@media (max-width: 700px) {
+  .app { flex-direction: column; }                    /* الشريط الأخضر يطلع فوق بدل الجنب */
+  .sidebar { width: auto; }                           /* ياخد عرض الشاشة كله */
+  .menu { flex: none; flex-direction: row; flex-wrap: wrap; }  /* الروابط جنب بعض بدل تحت بعض */
+}
