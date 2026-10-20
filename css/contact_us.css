@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background: #f4f2fb;
+    color: #1f1b3a;
+    padding: 24px;
+
+    display: flex;
+    gap: 24px;
+    min-height: 100vh;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    background: #1f4a33;
+    border-radius: 16px;
+    padding: 24px 16px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.logo img {
+    width: 30px;
+    height: 30px;
+}
+
+.menu {
+    flex: 1;                  /* ياخد المساحة الفاضية فيزق Log Out لتحت */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    color: #cfe3cf;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.menu-link img {
+    width: 20px;
+    height: 20px;
+}
+
+.menu-link:hover {
+    background: #2e5f44;
+}
+
+.active {
+    background: #eaf2e7;      /* الصفحة الحالية */
+    color: #1f4a33;
+}
+
+.active:hover {
+    background: #eaf2e7;
+}
+
+
+.main {
+    flex: 1;
+    padding: 24px;
+}
+
+#main {
+    background: #eaf2e7;
+    border-radius: 16px;
+    padding: 24px 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* يوسّط العناصر أفقياً */
+    justify-content: flex-start;
+    gap: 28px;
+    text-align: center;       /* يوسّط الكلام نفسه */
+}
+
+#main form {
+    width: 100%;
+    max-width: 450px;         /* عرض الفورم */
+    text-align: left;         /* الـ labels تفضل شمال جوه الفورم */
+}
+#main .card {
+    width: 100%;
+    max-width: 450px;
+    text-align: left;
+}
+.auth-side::before,
+.auth-side::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.auth-side h1  {
+ 
+  color:#2e5f44; 
+   font-size: 50px;
+}
+
+.auth-side pre {
+ 
+color: #2e5f44;
+padding: auto;
+}
+.auth-side.h1{
+    color: #c3e6c4;
+    padding: auto;
+   
+}
+.shahd{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
