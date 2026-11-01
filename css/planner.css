@@ -5,18 +5,25 @@ body {
   color: #1f4a33;
 }
 
+button,
+input {
+  font-family: Arial, sans-serif;
+}
+
+/* الصفحة كلها: الشريط الأخضر جنب الجزء الرئيسي */
 .app {
   display: flex;
   min-height: 100vh;
 }
 
+/* ========== الشريط الأخضر ========== */
 .sidebar {
   width: 250px;
   background: #1f4a33;
   padding: 24px 16px;
 
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   gap: 28px;
 }
 
@@ -36,7 +43,7 @@ body {
 }
 
 .menu {
-  flex: 1;                  /* ياخد المساحة الفاضية فيزق Log Out لتحت */
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -49,7 +56,7 @@ body {
   padding: 12px 14px;
   border-radius: 12px;
   color: #cfe3cf;
-  text-decoration: none;    /* يشيل الخط اللي تحت اللينك */
+  text-decoration: none;
   font-size: 14px;
   font-weight: bold;
 }
@@ -60,11 +67,11 @@ body {
 }
 
 .menu-link:hover {
-  background: #2e5f44;      /* لما الماوس يعدي عليه */
+  background: #2e5f44;
 }
 
 .active {
-  background: #eaf2e7;      /* الصفحة الحالية */
+  background: #eaf2e7;
   color: #1f4a33;
 }
 
@@ -74,15 +81,205 @@ body {
   padding: 20px 28px;
 }
 
+/* ========== الصف الأول: بحث + إشعارات + المستخدم ========== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.search {
+  width: 400px;
+  height: 44px;
+  background: #f4f8f1;
+  border: 1px solid #d3e1cf;
+  border-radius: 14px;
+  padding: 0 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search img {
+  width: 18px;
+  height: 18px;
+}
+
+.search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #1f4a33;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.bell {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  background: #f4f8f1;
+  border: 1px solid #d3e1cf;
+  border-radius: 14px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bell img {
+  width: 20px;
+  height: 20px;
+}
+
+.dot {
+  position: absolute;
+  top: 10px;
+  right: 11px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d64550;
+  border: 2px solid #f4f8f1;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #1f4a33;
+  color: white;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.user-role {
+  font-size: 12px;
+  color: #5d6f62;
+}
+
+/* ========== الصف التاني: العنوان والأزرار ========== */
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.page-head h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.page-head p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: #5d6f62;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.week-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: #f4f8f1;
+  border: 1px solid #d3e1cf;
+  border-radius: 14px;
+}
+
+.arrow {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow img {
+  width: 18px;
+  height: 18px;
+}
+
+.week-label {
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.today-btn {
+  height: 44px;
+  padding: 0 18px;
+  background: #f4f8f1;
+  border: 1px solid #d3e1cf;
+  border-radius: 14px;
+  color: #1f4a33;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-btn {
+  height: 44px;
+  padding: 0 22px;
+  background: #608359;
+  border: none;
+  border-radius: 99px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-btn img {
+  width: 16px;
+  height: 16px;
+}
+
 /* ========== كروت الملخص ========== */
 .stats {
   display: flex;
   gap: 16px;
-  flex-wrap: wrap;
 }
 
 .stat-card {
-  flex:1 1 200px;
+  flex: 1;
   background: #f4f8f1;
   border: 1px solid #d3e1cf;
   border-radius: 16px;
@@ -127,8 +324,163 @@ body {
   font-size: 12px;
   color: #5d6f62;
 }
-@media (max-width: 700px) {
-  .app { flex-direction: column; }                    /* الشريط الأخضر يطلع فوق بدل الجنب */
-  .sidebar { width: auto; }                           /* ياخد عرض الشاشة كله */
-  .menu { flex: none; flex-direction: row; flex-wrap: wrap; }  /* الروابط جنب بعض بدل تحت بعض */
+
+/* ========== الجدول الأسبوعي ========== */
+.row {
+  display: flex;
+  gap: 20px;
+  margin-top: 22px;
 }
+
+.week-card {
+  flex: 1;
+  background: #f4f8f1;
+  border: 1px solid #d3e1cf;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+/* فوق: العنوان والفلاتر */
+.week-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.week-top h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+}
+
+.chip {
+  padding: 8px 14px;
+  background: #f4f8f1;
+  border: 1px solid #d3e1cf;
+  border-radius: 99px;
+  color: #1f4a33;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.chip-active {
+  background: #1f4a33;
+  border-color: #1f4a33;
+  color: white;
+}
+
+/* صف الأيام */
+.days-head {
+  display: flex;
+  padding-bottom: 8px;
+}
+
+.spacer {
+  width: 56px;
+}
+
+.day-name {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.day-name small {
+  font-size: 12px;
+  font-weight: bold;
+  color: #5d6f62;
+}
+
+.day-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.today-num {
+  background: #608359;
+  color: white;
+}
+
+/* الجدول */
+.grid {
+  display: flex;
+  border-top: 1px solid #d3e1cf;
+}
+
+.hours {
+  width: 56px;
+}
+
+.hours span {
+  display: block;
+  height: 64px;
+  padding-right: 10px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: bold;
+  color: #5d6f62;
+}
+
+.day {
+  flex: 1;
+  position: relative;
+  height: 704px;
+  border-left: 1px solid #d3e1cf;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 63px,
+    #d3e1cf 63px,
+    #d3e1cf 64px
+  );
+}
+
+.today {
+  background-color: #eef5ea;
+}
+
+/* الجلسة */
+.session {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 12px;
+}
+
+.session b {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.session span {
+  font-size: 11px;
+}
+
+/* ألوان أنواع الجلسات */
+.study    { background: #dbe9d6; color: #2e5f44; }
+.meeting  { background: #e8efcf; color: #55662b; }
+.project  { background: #d3e8e3; color: #1f5a55; }
+.review   { background: #f2e7d2; color: #7a5a22; }
+.personal { background: #f4e0d6; color: #8a4a30; }
+
+/* الجلسة المختارة */
+.selected {
+  box-shadow: 0 0 0

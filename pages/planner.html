@@ -26,7 +26,6 @@
           <img src="https://api.iconify.design/lucide/list-checks.svg?color=%23cfe3cf" alt="">
           Tasks
         </a>
-        <!-- الصفحة الحالية: معاها كلاس active -->
         <a href="planner.html" class="menu-link active">
           <img src="https://api.iconify.design/lucide/calendar.svg?color=%231f4a33" alt="">
           Planner
@@ -52,9 +51,66 @@
 
     </div>
 
-    <!-- ========== الجزء الرئيسي (كروت الملخص) ========== -->
+    <!-- ========== الجزء الرئيسي ========== -->
     <div class="main">
 
+      <!-- الصف الأول: بحث + إشعارات + المستخدم -->
+      <div class="topbar">
+
+        <div class="search">
+          <img src="https://api.iconify.design/lucide/search.svg?color=%235d6f62" alt="search">
+          <input type="text" placeholder="Search sessions, tasks...">
+        </div>
+
+        <div class="top-right">
+          <button class="bell">
+            <img src="https://api.iconify.design/lucide/bell.svg?color=%231f4a33" alt="notifications">
+            <span class="dot"></span>
+          </button>
+
+          <div class="user">
+            <div class="avatar">AM</div>
+            <div>
+              <div class="user-name">Ahmed Mohamed</div>
+              <div class="user-role">Student</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- الصف التاني: العنوان والأزرار -->
+      <div class="page-head">
+
+        <div>
+          <h1>Weekly Planner</h1>
+          <p>Plan your week and protect your focus time.</p>
+        </div>
+
+        <div class="tools">
+
+          <div class="week-nav">
+            <button class="arrow">
+              <img src="https://api.iconify.design/lucide/chevron-left.svg?color=%231f4a33" alt="previous week">
+            </button>
+            <span class="week-label">Oct 18 – 24, 2026</span>
+            <button class="arrow">
+              <img src="https://api.iconify.design/lucide/chevron-right.svg?color=%231f4a33" alt="next week">
+            </button>
+          </div>
+
+          <button class="today-btn">Today</button>
+
+          <button class="add-btn">
+            <img src="https://api.iconify.design/lucide/plus.svg?color=%23ffffff" alt="">
+            Add Task
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- كروت الملخص -->
       <div class="stats">
 
         <div class="stat-card">
@@ -92,6 +148,156 @@
             <p class="note">keep it going</p>
           </div>
         </div>
+
+      </div>
+
+      <!-- ========== الجدول الأسبوعي ========== -->
+      <div class="row">
+
+        <div class="week-card">
+
+          <!-- فوق: العنوان والفلاتر -->
+          <div class="week-top">
+            <h2>This week</h2>
+            <div class="chips">
+              <button class="chip chip-active">All</button>
+              <button class="chip">Study</button>
+              <button class="chip">Project</button>
+              <button class="chip">Meeting</button>
+              <button class="chip">Review</button>
+              <button class="chip">Personal</button>
+            </div>
+          </div>
+
+          <!-- صف الأيام -->
+          <div class="days-head">
+            <div class="spacer"></div>
+            <div class="day-name"><small>SUN</small><span class="day-num">18</span></div>
+            <div class="day-name"><small>MON</small><span class="day-num today-num">19</span></div>
+            <div class="day-name"><small>TUE</small><span class="day-num">20</span></div>
+            <div class="day-name"><small>WED</small><span class="day-num">21</span></div>
+            <div class="day-name"><small>THU</small><span class="day-num">22</span></div>
+            <div class="day-name"><small>FRI</small><span class="day-num">23</span></div>
+            <div class="day-name"><small>SAT</small><span class="day-num">24</span></div>
+          </div>
+
+          <!-- الجدول: عمود الساعات + 7 أعمدة -->
+          <div class="grid">
+
+            <div class="hours">
+              <span>8 AM</span>
+              <span>9 AM</span>
+              <span>10 AM</span>
+              <span>11 AM</span>
+              <span>12 PM</span>
+              <span>1 PM</span>
+              <span>2 PM</span>
+              <span>3 PM</span>
+              <span>4 PM</span>
+              <span>5 PM</span>
+              <span>6 PM</span>
+            </div>
+
+            <!-- الأحد -->
+            <div class="day">
+              <div class="session study" style="top: 66px; height: 124px;">
+                <b>Study HTML</b>
+                <span>9:00 AM – 11:00 AM</span>
+              </div>
+              <div class="session review" style="top: 386px; height: 92px;">
+                <b>Read Docs</b>
+                <span>2:00 PM – 3:30 PM</span>
+              </div>
+            </div>
+
+            <!-- الاتنين (النهاردة) -->
+            <div class="day today">
+              <div class="session meeting" style="top: 98px; height: 60px;">
+                <b>Team Meeting</b>
+                <span>9:30 AM – 10:30 AM</span>
+              </div>
+              <div class="session study selected" style="top: 322px; height: 124px;">
+                <b>Practice JS</b>
+                <span>1:00 PM – 3:00 PM</span>
+              </div>
+              <div class="session review" style="top: 514px; height: 60px;">
+                <b>Review notes</b>
+                <span>4:00 PM – 5:00 PM</span>
+              </div>
+            </div>
+
+            <!-- التلات -->
+            <div class="day">
+              <div class="session project" style="top: 130px; height: 124px;">
+                <b>Design UI</b>
+                <span>10:00 AM – 12:00 PM</span>
+              </div>
+              <div class="session review" style="top: 386px; height: 60px;">
+                <b>Read Docs</b>
+                <span>2:00 PM – 3:00 PM</span>
+              </div>
+            </div>
+
+            <!-- الأربع -->
+            <div class="day">
+              <div class="session review" style="top: 194px; height: 92px;">
+                <b>Code Review</b>
+                <span>11:00 AM – 12:30 PM</span>
+              </div>
+              <div class="session project" style="top: 450px; height: 124px;">
+                <b>Project Tasks</b>
+                <span>3:00 PM – 5:00 PM</span>
+              </div>
+            </div>
+
+            <!-- الخميس -->
+            <div class="day">
+              <div class="session study" style="top: 66px; height: 92px;">
+                <b>Study HTML</b>
+                <span>9:00 AM – 10:30 AM</span>
+              </div>
+              <div class="session study" style="top: 322px; height: 92px;">
+                <b>Practice JS</b>
+                <span>1:00 PM – 2:30 PM</span>
+              </div>
+              <div class="session personal" style="top: 578px; height: 60px;">
+                <b>Workout</b>
+                <span>5:00 PM – 6:00 PM</span>
+              </div>
+            </div>
+
+            <!-- الجمعة -->
+            <div class="day">
+              <div class="session project" style="top: 130px; height: 124px;">
+                <b>Design UI</b>
+                <span>10:00 AM – 12:00 PM</span>
+              </div>
+              <div class="session project" style="top: 386px; height: 124px;">
+                <b>Project Tasks</b>
+                <span>2:00 PM – 4:00 PM</span>
+              </div>
+              <div class="session review" style="top: 546px; height: 60px;">
+                <b>Weekly recap</b>
+                <span>4:30 PM – 5:30 PM</span>
+              </div>
+            </div>
+
+            <!-- السبت -->
+            <div class="day">
+              <div class="session personal" style="top: 194px; height: 60px;">
+                <b>Rest and reset</b>
+                <span>11:00 AM – 12:00 PM</span>
+              </div>
+              <div class="session review" style="top: 450px; height: 60px;">
+                <b>Read Docs</b>
+                <span>3:00 PM – 4:00 PM</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- هنا هيتحط العمود اللي على اليمين بعدين -->
 
       </div>
 
