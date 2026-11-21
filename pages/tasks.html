@@ -1,1 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dayora - Tasks</title>
+  <link rel="stylesheet" href="../css/planner.css">
+  <link rel="stylesheet" href="../css/tasks.css">
+</head>
+<body>
+  <div class="app">
 
+    <!-- الشريط الأخضر (نفس بتاع الـ Planner، بس Tasks هي الـ active) -->
+    <div class="sidebar">
+      <div class="logo">
+        <img src="https://api.iconify.design/lucide/sprout.svg?color=%23ffffff" alt="logo">
+        <span>Dayora</span>
+      </div>
+      <div class="menu">
+        <a href="dashboard.html" class="menu-link"><img src="https://api.iconify.design/lucide/layout-dashboard.svg?color=%23cfe3cf" alt="">Dashboard</a>
+        <a href="tasks.html" class="menu-link active"><img src="https://api.iconify.design/lucide/list-checks.svg?color=%231f4a33" alt="">Tasks</a>
+        <a href="planner.html" class="menu-link"><img src="https://api.iconify.design/lucide/calendar.svg?color=%23cfe3cf" alt="">Planner</a>
+        <a href="focus.html" class="menu-link"><img src="https://api.iconify.design/lucide/timer.svg?color=%23cfe3cf" alt="">Focus Room</a>
+        <a href="analytics.html" class="menu-link"><img src="https://api.iconify.design/lucide/activity.svg?color=%23cfe3cf" alt="">Analytics</a>
+        <a href="settings.html" class="menu-link"><img src="https://api.iconify.design/lucide/settings.svg?color=%23cfe3cf" alt="">Settings</a>
+      </div>
+      <a href="../index.html" class="menu-link"><img src="https://api.iconify.design/lucide/log-out.svg?color=%23cfe3cf" alt="">Log Out</a>
+    </div>
+
+    <div class="main">
+
+      <!-- الصف اللي فوق (نفس بتاع الـ Planner) -->
+      <div class="topbar">
+        <div class="search">
+          <img src="https://api.iconify.design/lucide/search.svg?color=%235d6f62" alt="search">
+          <input type="text" id="search" placeholder="Search tasks...">
+        </div>
+        <div class="top-right">
+          <button class="bell">
+            <img src="https://api.iconify.design/lucide/bell.svg?color=%231f4a33" alt="notifications">
+            <span class="dot"></span>
+          </button>
+          <div class="user">
+            <div class="avatar">AM</div>
+            <div>
+              <div class="user-name">Ahmed Mohamed</div>
+              <div class="user-role">Student</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- العنوان والفلاتر -->
+      <div class="page-head">
+        <div>
+          <h1>Task Board</h1>
+          <p>Track your tasks from start to finish.</p>
+        </div>
+        <div class="tools">
+          <select class="select" id="filter-priority">
+            <option value="all">All Priority</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+          <select class="select" id="filter-status">
+            <option value="all">All Status</option>
+            <option value="todo">To Do</option>
+            <option value="progress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+          <button class="add-btn" id="add-btn">
+            <img src="https://api.iconify.design/lucide/plus.svg?color=%23ffffff" alt="">
+            Add Task
+          </button>
+        </div>
+      </div>
+
+      <!-- اللوحة: 3 أعمدة (الكروت بتتحط جواها بـ JavaScript) -->
+      <div class="board">
+
+        <div class="column todo">
+          <div class="col-head">To Do <span class="count" id="count-todo">0</span></div>
+          <div class="cards" id="list-todo"></div>
+        </div>
+
+        <div class="column progress">
+          <div class="col-head">In Progress <span class="count" id="count-progress">0</span></div>
+          <div class="cards" id="list-progress"></div>
+        </div>
+
+        <div class="column done">
+          <div class="col-head">Done <span class="count" id="count-done">0</span></div>
+          <div class="cards" id="list-done"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="../js/tasks.js"></script>
+</body>
+</html>
