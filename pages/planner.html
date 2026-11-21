@@ -110,14 +110,14 @@
 
       </div>
 
-      <!-- كروت الملخص -->
+      <!-- كروت الملخص (الأرقام بتتحسب من JavaScript) -->
       <div class="stats">
 
         <div class="stat-card">
           <div class="icon"><img src="https://api.iconify.design/lucide/clock.svg?color=%232e5f44" alt="clock"></div>
           <div>
             <h3>Planned this week</h3>
-            <p class="number">25 hrs</p>
+            <p class="number" id="stat-hours">25 hrs</p>
             <p class="note">across 7 days</p>
           </div>
         </div>
@@ -126,7 +126,7 @@
           <div class="icon"><img src="https://api.iconify.design/lucide/calendar.svg?color=%232e5f44" alt="calendar"></div>
           <div>
             <h3>Sessions</h3>
-            <p class="number">17</p>
+            <p class="number" id="stat-sessions">17</p>
             <p class="note">study and project blocks</p>
           </div>
         </div>
@@ -135,7 +135,7 @@
           <div class="icon"><img src="https://api.iconify.design/lucide/list-checks.svg?color=%232e5f44" alt="tasks"></div>
           <div>
             <h3>Tasks to schedule</h3>
-            <p class="number">3</p>
+            <p class="number" id="stat-tasks">3</p>
             <p class="note">waiting for a slot</p>
           </div>
         </div>
@@ -144,7 +144,7 @@
           <div class="icon"><img src="https://api.iconify.design/lucide/sprout.svg?color=%232e5f44" alt="streak"></div>
           <div>
             <h3>Focus streak</h3>
-            <p class="number">6 days</p>
+            <p class="number" id="stat-streak">6 days</p>
             <p class="note">keep it going</p>
           </div>
         </div>
@@ -160,12 +160,12 @@
           <div class="week-top">
             <h2>This week</h2>
             <div class="chips">
-              <button class="chip chip-active">All</button>
-              <button class="chip">Study</button>
-              <button class="chip">Project</button>
-              <button class="chip">Meeting</button>
-              <button class="chip">Review</button>
-              <button class="chip">Personal</button>
+              <button class="chip chip-active" data-type="all">All</button>
+              <button class="chip" data-type="study">Study</button>
+              <button class="chip" data-type="project">Project</button>
+              <button class="chip" data-type="meeting">Meeting</button>
+              <button class="chip" data-type="review">Review</button>
+              <button class="chip" data-type="personal">Personal</button>
             </div>
           </div>
 
@@ -181,7 +181,7 @@
             <div class="day-name"><small>SAT</small><span class="day-num">24</span></div>
           </div>
 
-          <!-- الجدول: عمود الساعات + 7 أعمدة -->
+          <!-- الجدول: عمود الساعات + 7 أعمدة (الجلسات بتتحط جواها بـ JavaScript) -->
           <div class="grid">
 
             <div class="hours">
@@ -198,111 +198,22 @@
               <span>6 PM</span>
             </div>
 
-            <!-- الأحد -->
-            <div class="day">
-              <div class="session study" style="top: 66px; height: 124px;">
-                <b>Study HTML</b>
-                <span>9:00 AM – 11:00 AM</span>
-              </div>
-              <div class="session review" style="top: 386px; height: 92px;">
-                <b>Read Docs</b>
-                <span>2:00 PM – 3:30 PM</span>
-              </div>
-            </div>
-
-            <!-- الاتنين (النهاردة) -->
-            <div class="day today">
-              <div class="session meeting" style="top: 98px; height: 60px;">
-                <b>Team Meeting</b>
-                <span>9:30 AM – 10:30 AM</span>
-              </div>
-              <div class="session study selected" style="top: 322px; height: 124px;">
-                <b>Practice JS</b>
-                <span>1:00 PM – 3:00 PM</span>
-              </div>
-              <div class="session review" style="top: 514px; height: 60px;">
-                <b>Review notes</b>
-                <span>4:00 PM – 5:00 PM</span>
-              </div>
-            </div>
-
-            <!-- التلات -->
-            <div class="day">
-              <div class="session project" style="top: 130px; height: 124px;">
-                <b>Design UI</b>
-                <span>10:00 AM – 12:00 PM</span>
-              </div>
-              <div class="session review" style="top: 386px; height: 60px;">
-                <b>Read Docs</b>
-                <span>2:00 PM – 3:00 PM</span>
-              </div>
-            </div>
-
-            <!-- الأربع -->
-            <div class="day">
-              <div class="session review" style="top: 194px; height: 92px;">
-                <b>Code Review</b>
-                <span>11:00 AM – 12:30 PM</span>
-              </div>
-              <div class="session project" style="top: 450px; height: 124px;">
-                <b>Project Tasks</b>
-                <span>3:00 PM – 5:00 PM</span>
-              </div>
-            </div>
-
-            <!-- الخميس -->
-            <div class="day">
-              <div class="session study" style="top: 66px; height: 92px;">
-                <b>Study HTML</b>
-                <span>9:00 AM – 10:30 AM</span>
-              </div>
-              <div class="session study" style="top: 322px; height: 92px;">
-                <b>Practice JS</b>
-                <span>1:00 PM – 2:30 PM</span>
-              </div>
-              <div class="session personal" style="top: 578px; height: 60px;">
-                <b>Workout</b>
-                <span>5:00 PM – 6:00 PM</span>
-              </div>
-            </div>
-
-            <!-- الجمعة -->
-            <div class="day">
-              <div class="session project" style="top: 130px; height: 124px;">
-                <b>Design UI</b>
-                <span>10:00 AM – 12:00 PM</span>
-              </div>
-              <div class="session project" style="top: 386px; height: 124px;">
-                <b>Project Tasks</b>
-                <span>2:00 PM – 4:00 PM</span>
-              </div>
-              <div class="session review" style="top: 546px; height: 60px;">
-                <b>Weekly recap</b>
-                <span>4:30 PM – 5:30 PM</span>
-              </div>
-            </div>
-
-            <!-- السبت -->
-            <div class="day">
-              <div class="session personal" style="top: 194px; height: 60px;">
-                <b>Rest and reset</b>
-                <span>11:00 AM – 12:00 PM</span>
-              </div>
-              <div class="session review" style="top: 450px; height: 60px;">
-                <b>Read Docs</b>
-                <span>3:00 PM – 4:00 PM</span>
-              </div>
-            </div>
+            <div class="day" id="day-0"></div>
+            <div class="day today" id="day-1"></div>
+            <div class="day" id="day-2"></div>
+            <div class="day" id="day-3"></div>
+            <div class="day" id="day-4"></div>
+            <div class="day" id="day-5"></div>
+            <div class="day" id="day-6"></div>
 
           </div>
         </div>
-
-        <!-- هنا هيتحط العمود اللي على اليمين بعدين -->
 
       </div>
 
     </div>
   </div>
 
+  <script src="../js/planner.js"></script>
 </body>
 </html>
