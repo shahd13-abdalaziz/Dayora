@@ -1,0 +1,514 @@
+.sit_header{
+    padding: 25px 5%;
+}
+.brand{
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    color: #314b37;
+}
+.brand_logo{
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+
+}
+.brand_name{
+    font-size: 35px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+ /* ==============================
+   DAYORA - CONTACT PAGE
+============================== */
+
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    background-color: #f3f3e8;
+    font-family: 'Poppins', sans-serif;
+    color: #314b37;
+}
+/* ==============================
+   CONTACT LAYOUT
+============================== */
+.contact_layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 50px;
+    width: 90%;
+    max-width: 1250px;
+    margin: 35px auto 60px;
+}
+.contact_left,
+.contact_right {
+    width: 100%;
+    min-width: 0;
+}
+/* ==============================
+   CONTACT LABEL
+============================== */
+
+.contact_label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 18px;
+    margin-bottom: 20px;
+
+    background-color: #e5ecdf;
+    border: 1px solid #d6e1d1;
+    border-radius: 30px;
+
+    color: #405d3f;
+    font-size: 14px;
+    font-weight: 500;
+}
+/* ==============================
+   CONTACT HEADING
+============================== */
+.contact_heading {
+    margin: 0 0 22px;
+    color: #214b3e;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 600;
+    line-height: 1.2;
+    overflow-wrap: normal;
+}
+.contact_heading .first {
+    color: #214b3e;
+}
+.contact_heading .second {
+    display: block;
+    color: #759574;
+}
+/* ==============================
+   CONTACT DESCRIPTION
+============================== */
+.contact_description {
+    max-width: 470px;
+    margin: 0 0 30px;
+
+    color: #68736d;
+    font-size: 16px;
+    line-height: 1.9;
+}
+/* ==============================
+   CONTACT DETAILS
+============================== */
+.contact_details {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+.contact_item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.contact_item > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    background-color: #e5ecdf;
+    border-radius: 50%;
+    color: #315b46;
+    font-size: 19px;
+}
+.contact_item p {
+    margin: 0 0 5px;
+    color: #263d34;
+    font-size: 15px;
+    font-weight: 500;
+}
+.contact_item span {
+    color: #758078;
+    font-size: 13px;
+}
+/* ==============================
+   FORM CARD
+============================== */
+.contact_form_card {
+    width: 100%;
+    min-width: 0;
+    padding: 35px;
+    background-color: #ffffff;
+    border: 1px solid #edf0e9;
+    border-radius: 25px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+.contact_form_card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.11);
+}
+.contact_form_card h2 {
+    margin: 0 0 10px;
+    color: #234b3e;
+    font-size: 28px;
+    font-weight: 600;
+}
+.form_description {
+    margin: 0 0 28px;
+    color: #758078;
+    font-size: 14px;
+    line-height: 1.8;
+}
+/* ==============================
+   FORM STRUCTURE
+============================== */
+.contact_form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+.form_row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+    width: 100%;
+}
+/* ==============================
+   INPUT FIELDS
+============================== */
+.input_box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+    padding: 15px 16px;
+    background-color: #fafaf7;
+    border: 1px solid #e4e6df;
+    border-radius: 14px;
+    transition: border-color 0.3s ease,
+                box-shadow 0.3s ease,
+                background-color 0.3s ease;
+}
+.input_box > i {
+    flex-shrink: 0;
+    color: #526b5a;
+    font-size: 17px;
+}
+.input_box input,
+.input_box select,
+.input_box textarea {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #263d34;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.input_box input::placeholder,
+.input_box textarea::placeholder {
+    color: #8b938c;
+}
+/* Focus effect */
+.input_box:focus-within {
+    border-color: #587856;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(88, 120, 86, 0.12);
+}
+/* ==============================
+   SUBJECT FIELD
+============================== */
+.input_box_subject_box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    min-height: 58px;
+    margin-top: 20px;
+    margin-bottom: 16px;
+    padding: 14px 18px;
+    border: 1px solid #e4e6df;
+    border-radius: 18px;
+    background-color: #fafaf7;
+    box-sizing: border-box;
+}
+.input_box_subject_box select {
+    cursor: pointer;
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #214b3e;
+    font-family: 'Poppins',sans-serif;
+    font-size: 14px;
+}
+/* ==============================
+   MESSAGE FIELD
+============================== */
+.input_box_message_box {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    width: 100%;
+    min-width: 0;
+    gap: 12px;
+    min-height: 150px;
+    padding: 16px 18px;
+    border: 1px solid #e4e6df;
+    border-radius: 18px;
+    background-color: #fafaf7;
+    box-sizing: border-box;
+}
+.input_box_message_box > i {
+    margin-top: 3px;
+}
+.input_box_message_box textarea {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    min-height: 115px;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #214b3e;
+    font-family: 'Poppins',sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    line-height: 1.6;
+    resize: vertical;
+}
+/* ==============================
+   SEND BUTTON
+============================== */
+.send_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 17px 24px;
+    background-color: #587856;
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease,
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+.send_button:hover {
+    background-color: #405d3f;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(64, 93, 63, 0.2);
+}
+.send_button i {
+    transition: transform 0.3s ease;
+}
+.send_button:hover i {
+    transform: translateX(5px);
+}
+/* ==============================
+   TABLET
+============================== */
+@media (max-width: 992px) {
+    .contact_layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 35px;
+
+        width: 90%;
+        max-width: 680px;
+        margin: 30px auto 50px;
+    }
+    .contact_left,
+    .contact_right {
+        width: 100%;
+    }
+    .contact_heading {
+        font-size: clamp(36px, 6vw, 48px);
+    }
+    .contact_description {
+        max-width: 100%;
+    }
+}
+/* ==============================
+   MOBILE
+============================== */
+@media (max-width: 600px) {
+    .contact_layout {
+        width: 100%;
+        padding: 20px 16px;
+        margin: 15px auto 35px;
+        gap: 28px;
+    }
+    .contact_label {
+        font-size: 12px;
+        padding: 8px 14px;
+    }
+    .contact_heading {
+        font-size: clamp(30px, 8vw, 38px);
+        line-height: 1.25;
+        margin-bottom: 18px;
+    }
+    .contact_description {
+        font-size: 14px;
+        line-height: 1.8;
+        margin-bottom: 25px;
+    }
+    .contact_details {
+        gap: 18px;
+    }
+    .contact_item {
+        gap: 12px;
+    }
+    .contact_item > i {
+        width: 44px;
+        height: 44px;
+        font-size: 16px;
+    }
+    .contact_item p {
+        font-size: 14px;
+    }
+
+    .contact_item span {
+        font-size: 12px;
+    }
+
+    .contact_form_card {
+        padding: 24px 16px;
+        border-radius: 22px;
+    }
+
+    .contact_form_card h2 {
+        font-size: 24px;
+    }
+
+    .form_description {
+        font-size: 13px;
+        margin-bottom: 22px;
+    }
+
+    .contact_form {
+        gap: 14px;
+    }
+
+    .form_row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+    }
+
+    .input_box {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .input_box_subject_box {
+        margin-top: 8px;
+        min-height: 54px;
+    }
+
+    .input_box_message_box {
+        min-height: 130px;
+    }
+
+    .input_box_message_box textarea {
+        min-height: 95px;
+    }
+
+    .send_button {
+        padding: 16px 14px;
+        font-size: 14px;
+    }
+}
+
+/* Prevent horizontal overflow */
+img,
+input,
+select,
+textarea {
+    max-width: 100%;
+}
+/* ==============================
+   VALIDATION STATES (VALID / INVALID)
+============================== */
+.input_box.is-valid,
+.input_box_subject_box.is-valid,
+.input_box_message_box.is-valid {
+    border-color: #4f8a5b;
+    background-color: #f4faf5;
+}
+
+.input_box.is-valid > i,
+.input_box_subject_box.is-valid > i,
+.input_box_message_box.is-valid > i {
+    color: #4f8a5b;
+}
+
+.input_box.is-invalid,
+.input_box_subject_box.is-invalid,
+.input_box_message_box.is-invalid {
+    border-color: #c94a4a;
+    background-color: #fdf5f5;
+}
+
+.input_box.is-invalid > i,
+.input_box_subject_box.is-invalid > i,
+.input_box_message_box.is-invalid > i {
+    color: #c94a4a;
+}
+.field_group{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+.field_group .input_box_subject_box,
+.field_group .input_box_message_box{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.col_field{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+.field_error_msg {
+    display: block;
+    padding-left: 6px;
+    color: #c94a4a;
+    font-size: 12px;
+    font-weight: 500;
+}
+.field_error_msg:empty{
+    display: none;
+}
+.form_status_msg {
+    margin: 6px 0 0;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.form_status_msg.error {
+    color: #c94a4a;
+}
+
+.form_status_msg.success {
+    color: #3b7a48;
+}
