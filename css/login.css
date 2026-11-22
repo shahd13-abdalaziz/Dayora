@@ -20,24 +20,6 @@ a {
   font-size: 14px;
 }
 
-/* message under the form when the server says no (wrong password, email taken...) */
-.form-error {
-  min-height: 0;
-  color: #c0392b;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.form-error:empty {
-  display: none;
-}
-
-.btn:disabled {
-  opacity: 0.7;
-  cursor: wait;
-  transform: none;
-}
-
 /* ===== Page ===== */
 .auth-page {
   min-height: 100vh;

@@ -108,7 +108,7 @@ if (form) {
         field.addEventListener('blur', () => validateField(field));
     });
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
         const results = allFields.map((f) => validateField(f));
         if (!results.every(Boolean)) {
@@ -118,23 +118,6 @@ if (form) {
             if (firstBad) firstBad.focus();
             return;
         }
-
-        // The checks above passed: send it to the server (it validates again, never trust the browser alone).
-        if (sendBtn) sendBtn.disabled = true;
-        try {
-            await Api.post('/contact', {
-                name: nameInput.value.trim(),
-                email: emailInput.value.trim(),
-                subject: subjectSelect.value,
-                message: messageTextarea.value.trim(),
-            });
-        } catch (err) {
-            statusMsg.textContent = err.message;
-            statusMsg.className = 'form_status_msg error';
-            if (sendBtn) sendBtn.disabled = false;
-            return;   // keep what the person typed so they can try again
-        }
-        if (sendBtn) sendBtn.disabled = false;
 
         statusMsg.textContent = 'Message sent successfully! We will get back to you soon.';
         statusMsg.className = 'form_status_msg success';

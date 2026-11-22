@@ -5,58 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dayora Dashboard</title>
     <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/app.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="../js/utils/theme.js"></script>
 </head>
-<body data-protected>
+<body>
     <div class="dashboard-layout">
         <!-- Sidebar -->
         <aside class="sidebar">
             <!-- Logo -->
-            <a href="home.html" class="brand">
+            <a href="../home.html" class="brand">
                 <img src="../imgs/file_00000000322c8210980e21a958c092d7.png" alt="Dayora Logo">
                 <span>Dayora</span>
             </a>
             <!-- Navigation -->
             <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-item active">
+                <a href="home.html" class="nav-item">
                     <i class="fa-solid fa-house"></i>
-                    <span>Dashboard</span>
+                    <span>Home</span>
                 </a>
                 <a href="tasks.html" class="nav-item">
                     <i class="fa-regular fa-square-check"></i>
                     <span>Tasks</span>
                 </a>
-                <a href="planner.html" class="nav-item">
+                <a href="calendar.html" class="nav-item">
                     <i class="fa-regular fa-calendar"></i>
-                    <span>Planner</span>
+                    <span>Calendar</span>
                 </a>
-                <a href="focus.html" class="nav-item">
+                <a href="habits.html" class="nav-item">
                     <i class="fa-solid fa-seedling"></i>
-                    <span>Focus Room</span>
+                    <span>Habits</span>
                 </a>
-                <a href="analytics.html" class="nav-item">
-                    <i class="fa-solid fa-chart-simple"></i>
-                    <span>Analytics</span>
+                <a href="notes.html" class="nav-item">
+                    <i class="fa-regular fa-note-sticky"></i>
+                    <span>Notes</span>
                 </a>
-                <a href="settings.html" class="nav-item">
-                    <i class="fa-solid fa-gear"></i>
-                    <span>Settings</span>
+                <a href="expenses.html" class="nav-item">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Expenses</span>
                 </a>
             </nav>
             <!-- Sidebar Bottom -->
             <div class="sidebar-bottom">
                 <div class="sidebar-divider"></div>
-                <!-- Log out (you are already logged in on this page) -->
+                <!-- Login & Register -->
                 <div class="auth-buttons">
-                    <a href="login.html" class="login-btn" data-logout>
-                        Log out
+                    <a href="login.html" class="login-btn">
+                        Login
+                    </a>
+                    <a href="register.html" class="register-btn">
+                        Register
                     </a>
                 </div>
                 <!-- Theme Button -->
@@ -82,58 +83,11 @@
     <span>❤️</span>
 </div>
         </aside>
-
-        <!-- Main Area -->
+        <!-- Empty Main Area -->
         <main class="main-content">
-            <div class="page">
-                <h1 id="greeting">Welcome back</h1>
-                <p class="sub" id="today-date"></p>
-
-                <div class="stats">
-                    <div class="stat-card">
-                        <div class="icon"><i class="fa-regular fa-square-check"></i></div>
-                        <div><h3>Open tasks</h3><p class="number" id="s-open">-</p></div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="icon"><i class="fa-regular fa-calendar"></i></div>
-                        <div><h3>Due today</h3><p class="number" id="s-due">-</p></div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="icon"><i class="fa-regular fa-clock"></i></div>
-                        <div><h3>Focus today</h3><p class="number" id="s-focus">-</p></div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="icon"><i class="fa-solid fa-seedling"></i></div>
-                        <div><h3>Streak</h3><p class="number" id="s-streak">-</p></div>
-                    </div>
-                </div>
-
-                <div class="panel-grid">
-                    <div class="panel">
-                        <h2>Daily focus goal</h2>
-                        <p class="hint" id="goal-text"></p>
-                        <div class="progress-bar"><i id="goal-bar" style="width:0%"></i></div>
-                    </div>
-                </div>
-
-                <div class="panel-grid two">
-                    <div class="panel">
-                        <h2>Up next</h2>
-                        <div class="list" id="upcoming"></div>
-                        <p class="hint" style="margin-top:14px;"><a href="tasks.html"><b>Open the task board &rarr;</b></a></p>
-                    </div>
-                    <div class="panel">
-                        <h2>Today's schedule</h2>
-                        <div class="list" id="today-sessions"></div>
-                        <p class="hint" style="margin-top:14px;"><a href="planner.html"><b>Open the planner &rarr;</b></a></p>
-                    </div>
-                </div>
-            </div>
+            <!-- Your other pages will be connected here -->
         </main>
     </div>
-    <script src="../js/utils/storage.js"></script>
-    <script src="../js/utils/api.js"></script>
-    <script src="../js/app.js"></script>
-    <script src="../js/dashboard.js"></script>
+    <script src="../js/utils/theme.js"></script>
 </body>
 </html>
