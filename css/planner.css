@@ -463,6 +463,7 @@ input {
   border-radius: 10px;
   overflow: hidden;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .session b {
@@ -483,4 +484,5 @@ input {
 
 /* الجلسة المختارة */
 .selected {
-  box-shadow: 0 0 0
+  box-shadow: 0 0 0 2px #2e5f44;
+}
