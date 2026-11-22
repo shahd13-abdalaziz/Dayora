@@ -1,0 +1,17 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+TestResults/
+
+# Local secrets and data (never commit)
+server/Dayora.Api/App_Data/
+appsettings.Local.json
+*.mdf
+*.ldf
+
+# Node (if the frontend ever gets a toolchain)
+node_modules/
+
+.DS_Store
