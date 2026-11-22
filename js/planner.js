@@ -123,18 +123,18 @@ chips.forEach(function (chip) {
 const addBtn = document.querySelector(".add-btn");
 
 addBtn.addEventListener("click", function () {
-  const title = prompt("اسم الجلسة؟");
+  const title = prompt("Session name?");
   if (!title) return;                      // لو قفلتي النافذة أو سبتيها فاضية
 
-  const day   = Number(prompt("اليوم؟ (0 = الأحد ... 6 = السبت)"));
-  const start = Number(prompt("بتبدأ الساعة كام؟ (مثلا 13 = 1 PM)"));
-  const end   = Number(prompt("بتنتهي الساعة كام؟"));
-  const type  = prompt("النوع؟ study / project / meeting / review / personal");
+  const day   = Number(prompt("Day? (0 = Sunday ... 6 = Saturday)"));
+  const start = Number(prompt("Start hour? (e.g. 13 = 1 PM)"));
+  const end   = Number(prompt("End hour?"));
+  const type  = prompt("Type? study / project / meeting / review / personal");
 
   // تأكد إن القيم منطقية
   const types = ["study", "project", "meeting", "review", "personal"];
   if (day < 0 || day > 6 || start < 8 || end > 19 || end <= start || !types.includes(type)) {
-    alert("فيه قيمة غلط، جربي تاني");
+    alert("Something is wrong, please try again");
     return;
   }
 
