@@ -1,151 +1,176 @@
-// ==========================================
-// 1) البيانات (هنا بتغير الجلسات والمهام)
-// ==========================================
-// day: 0 = الأحد ... 6 = السبت
-// start و end بالساعة (13 = 1 PM، و9.5 = 9:30 AM)
-const sessions = [
-  { title: "Study HTML",     type: "study",    day: 0, start: 9,    end: 11   },
-  { title: "Read Docs",      type: "review",   day: 0, start: 14,   end: 15.5 },
-  { title: "Team Meeting",   type: "meeting",  day: 1, start: 9.5,  end: 10.5 },
-  { title: "Practice JS",    type: "study",    day: 1, start: 13,   end: 15   },
-  { title: "Review notes",   type: "review",   day: 1, start: 16,   end: 17   },
-  { title: "Design UI",      type: "project",  day: 2, start: 10,   end: 12   },
-  { title: "Read Docs",      type: "review",   day: 2, start: 14,   end: 15   },
-  { title: "Code Review",    type: "review",   day: 3, start: 11,   end: 12.5 },
-  { title: "Project Tasks",  type: "project",  day: 3, start: 15,   end: 17   },
-  { title: "Study HTML",     type: "study",    day: 4, start: 9,    end: 10.5 },
-  { title: "Practice JS",    type: "study",    day: 4, start: 13,   end: 14.5 },
-  { title: "Workout",        type: "personal", day: 4, start: 17,   end: 18   },
-  { title: "Design UI",      type: "project",  day: 5, start: 10,   end: 12   },
-  { title: "Project Tasks",  type: "project",  day: 5, start: 14,   end: 16   },
-  { title: "Weekly recap",   type: "review",   day: 5, start: 16.5, end: 17.5 },
-  { title: "Rest and reset", type: "personal", day: 6, start: 11,   end: 12   },
-  { title: "Read Docs",      type: "review",   day: 6, start: 15,   end: 16   }
-];
+// Weekly planner (pages/planner.html). Sessions live on the server, one week is loaded at a time.
 
-const tasks = [
-  { title: "Write project docs",    done: false },
-  { title: "Fix responsive issues", done: false },
-  { title: "Test components",       done: false },
-  { title: "Final presentation",    done: true  }
-];
+const TYPES = [['study', 'Study'], ['project', 'Project'], ['meeting', 'Meeting'], ['review', 'Review'], ['personal', 'Personal']];
+const FIRST_HOUR = 8;      // the grid shows 8 AM ...
+const LAST_HOUR = 19;      // ... to 7 PM
+const ROW = 64;            // pixels per hour (same number as planner.css)
 
-const streak = 6;
+let weekStart = startOfWeek(new Date());   // Sunday of the week on screen
+let sessions = [];
+let filter = 'all';
+let searchText = '';
 
-// ==========================================
-// 2) حالة الصفحة (اللي بتتغير لما المستخدم يدوس)
-// ==========================================
-let filter = "all";   // الفلتر المختار
-let selected = 3;     // رقم الجلسة المختارة (3 = Practice JS)
-
-// ==========================================
-// 3) دالة مساعدة
-// ==========================================
-// بتحول 13 إلى "1:00 PM" و 9.5 إلى "9:30 AM"
-function formatTime(h) {
-  const hour = Math.floor(h);
-  const minutes = h % 1 === 0 ? "00" : "30";
-  const suffix = hour >= 12 ? "PM" : "AM";
-  const hour12 = hour % 12 === 0 ? 12 : hour % 12;
-  return hour12 + ":" + minutes + " " + suffix;
+function startOfWeek(d) {
+  const x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  x.setDate(x.getDate() - x.getDay());     // getDay(): 0 = Sunday
+  return x;
 }
 
-// ==========================================
-// 4) الكروت: بتتحسب من البيانات
-// ==========================================
-function updateCards() {
-  let totalHours = 0;
-  for (const s of sessions) {
-    totalHours += s.end - s.start;
+// "Oct 18 – 24, 2026"  or  "Oct 28 – Nov 3, 2026"
+function weekLabel() {
+  const end = App.addDays(weekStart, 6);
+  const m = (d) => d.toLocaleDateString('en-US', { month: 'short' });
+  const range = m(weekStart) === m(end)
+    ? `${m(weekStart)} ${weekStart.getDate()} – ${end.getDate()}`
+    : `${m(weekStart)} ${weekStart.getDate()} – ${m(end)} ${end.getDate()}`;
+  return `${range}, ${end.getFullYear()}`;
+}
+
+// 30-minute choices for the start / end pickers: 8:00 AM ... 7:00 PM
+function hourOptions(from, to) {
+  const out = [];
+  for (let h = from; h <= to; h += 0.5) out.push([h, App.formatHour(h)]);
+  return out;
+}
+
+// ---------- header: days, label ----------
+function renderHeader() {
+  document.getElementById('week-label').textContent = weekLabel();
+  const today = App.ymd();
+  for (let d = 0; d < 7; d++) {
+    const date = App.addDays(weekStart, d);
+    const isToday = App.ymd(date) === today;
+    const num = document.getElementById(`dn-${d}`);
+    num.textContent = date.getDate();
+    num.classList.toggle('today-num', isToday);
+    document.getElementById(`day-${d}`).classList.toggle('today', isToday);
   }
-
-  const tasksLeft = tasks.filter(function (t) { return !t.done; }).length;
-
-  document.getElementById("stat-hours").textContent = totalHours + " hrs";
-  document.getElementById("stat-sessions").textContent = sessions.length;
-  document.getElementById("stat-tasks").textContent = tasksLeft;
-  document.getElementById("stat-streak").textContent = streak + " days";
 }
 
-// ==========================================
-// 5) الجدول: بيترسم من البيانات
-// ==========================================
+// ---------- the grid ----------
 function renderTable() {
   for (let d = 0; d < 7; d++) {
-    const column = document.getElementById("day-" + d);
-    column.innerHTML = "";   // امسح اللي فيه الأول
+    const column = document.getElementById(`day-${d}`);
+    column.replaceChildren();
+    const dateStr = App.ymd(App.addDays(weekStart, d));
 
-    sessions.forEach(function (s, i) {
-      if (s.day !== d) return;                               // مش من اليوم ده
-      if (filter !== "all" && s.type !== filter) return;     // الفلتر مش مختاره
+    for (const s of sessions) {
+      if (s.date !== dateStr) continue;
+      if (filter !== 'all' && s.type !== filter) continue;
+      if (searchText && !s.title.toLowerCase().includes(searchText)) continue;
+      // The grid only draws 8 AM - 7 PM; clip anything outside it.
+      const start = Math.max(s.startHour, FIRST_HOUR);
+      const end = Math.min(s.endHour, LAST_HOUR);
+      if (end <= start) continue;
 
-      const box = document.createElement("div");
-      box.className = "session " + s.type;
-      if (i === selected) box.classList.add("selected");
-
-      box.style.top = (s.start - 8) * 64 + 2 + "px";
-      box.style.height = (s.end - s.start) * 64 - 4 + "px";
-
-      box.innerHTML =
-        "<b>" + s.title + "</b>" +
-        "<span>" + formatTime(s.start) + " – " + formatTime(s.end) + "</span>";
-
-      // لما تدوس على الجلسة تبقى هي المختارة
-      box.addEventListener("click", function () {
-        selected = i;
-        renderTable();
-      });
-
-      column.appendChild(box);
-    });
+      const box = App.el('div', {
+        class: `session ${s.type}`, title: 'Click to edit',
+        style: `top:${(start - FIRST_HOUR) * ROW + 2}px;height:${(end - start) * ROW - 4}px`,
+        onclick: () => openSessionForm(s),
+      },
+        App.el('b', { text: s.title }),
+        App.el('span', { text: `${App.formatHour(s.startHour)} – ${App.formatHour(s.endHour)}` }));
+      column.append(box);
+    }
   }
 }
 
-// ==========================================
-// 6) الفلاتر (All / Study / Project ...)
-// ==========================================
-const chips = document.querySelectorAll(".chip");
+// ---------- the four cards on top ----------
+async function loadSummary() {
+  const from = App.ymd(weekStart);
+  const to = App.ymd(App.addDays(weekStart, 6));
+  try {
+    const s = await Api.get(`/sessions/summary?from=${from}&to=${to}&today=${App.ymd()}`);
+    const hours = Number(s.plannedHours.toFixed(1));
+    document.getElementById('stat-hours').textContent = `${hours} ${hours === 1 ? 'hr' : 'hrs'}`;
+    document.getElementById('stat-sessions').textContent = s.sessions;
+    document.getElementById('stat-tasks').textContent = s.tasksToSchedule;
+    document.getElementById('stat-streak').textContent = `${s.streak} day${s.streak === 1 ? '' : 's'}`;
+  } catch (err) {
+    App.showError(err);
+  }
+}
 
-chips.forEach(function (chip) {
-  chip.addEventListener("click", function () {
+async function loadWeek() {
+  renderHeader();
+  const from = App.ymd(weekStart);
+  const to = App.ymd(App.addDays(weekStart, 6));
+  try {
+    ({ sessions } = await Api.get(`/sessions?from=${from}&to=${to}`));
+  } catch (err) {
+    sessions = [];
+    App.showError(err);
+  }
+  renderTable();
+  loadSummary();
+}
+
+// ---------- add / edit / delete ----------
+/** session = null -> new one. Otherwise edit that session (with a Delete button). */
+function openSessionForm(session = null) {
+  const hours = hourOptions(FIRST_HOUR, LAST_HOUR);
+  App.form({
+    title: session ? 'Edit session' : 'New session',
+    submit: session ? 'Save changes' : 'Add session',
+    values: session
+      ? { title: session.title, type: session.type, date: session.date, startHour: session.startHour, endHour: session.endHour }
+      : { type: 'study', date: App.ymd(), startHour: 9, endHour: 10 },
+    fields: [
+      { name: 'title', label: 'Session name', required: true, max: 120 },
+      { name: 'type', label: 'Type', type: 'select', options: TYPES },
+      { name: 'date', label: 'Day', type: 'date', required: true },
+      { name: 'startHour', label: 'Starts', type: 'select', options: hours.slice(0, -1) },
+      { name: 'endHour', label: 'Ends', type: 'select', options: hours.slice(1) },
+    ],
+    extra: session && {
+      label: 'Delete',
+      onClick: async () => {
+        if (!(await App.confirm(`"${session.title}" will be removed from your week.`))) return false;
+        try {
+          await Api.del(`/sessions/${session.id}`);
+          await loadWeek();
+          App.toast('Session deleted');
+          return true;
+        } catch (err) {
+          App.showError(err);
+          return false;
+        }
+      },
+    },
+    onSubmit: async (v) => {
+      const body = { title: v.title, type: v.type, date: v.date, startHour: Number(v.startHour), endHour: Number(v.endHour) };
+      if (body.endHour <= body.startHour) {
+        const err = new ApiError(400, 'A session must end after it starts', { endHour: 'Pick a time after the start' });
+        throw err;
+      }
+      if (session) await Api.put(`/sessions/${session.id}`, body);
+      else await Api.post('/sessions', body);
+
+      // If the session was put on another week, follow it there so it does not "disappear".
+      if (body.date < App.ymd(weekStart) || body.date > App.ymd(App.addDays(weekStart, 6))) {
+        weekStart = startOfWeek(App.parseYmd(body.date));
+      }
+      await loadWeek();
+      App.toast(session ? 'Session updated' : 'Session added');
+    },
+  });
+}
+
+// ---------- buttons, filters ----------
+document.getElementById('prev-week').addEventListener('click', () => { weekStart = App.addDays(weekStart, -7); loadWeek(); });
+document.getElementById('next-week').addEventListener('click', () => { weekStart = App.addDays(weekStart, 7); loadWeek(); });
+document.getElementById('today-btn').addEventListener('click', () => { weekStart = startOfWeek(new Date()); loadWeek(); });
+document.getElementById('add-btn').addEventListener('click', () => openSessionForm());
+document.getElementById('search').addEventListener('input', (e) => { searchText = e.target.value.trim().toLowerCase(); renderTable(); });
+
+const chips = document.querySelectorAll('.chip');
+chips.forEach((chip) => {
+  chip.addEventListener('click', () => {
     filter = chip.dataset.type;
-
-    chips.forEach(function (c) { c.classList.remove("chip-active"); });
-    chip.classList.add("chip-active");
-
+    chips.forEach((c) => c.classList.remove('chip-active'));
+    chip.classList.add('chip-active');
     renderTable();
   });
 });
 
-// ==========================================
-// 7) زرار Add Task
-// ==========================================
-const addBtn = document.querySelector(".add-btn");
-
-addBtn.addEventListener("click", function () {
-  const title = prompt("اسم الجلسة؟");
-  if (!title) return;                      // لو قفلتي النافذة أو سبتيها فاضية
-
-  const day   = Number(prompt("اليوم؟ (0 = الأحد ... 6 = السبت)"));
-  const start = Number(prompt("بتبدأ الساعة كام؟ (مثلا 13 = 1 PM)"));
-  const end   = Number(prompt("بتنتهي الساعة كام؟"));
-  const type  = prompt("النوع؟ study / project / meeting / review / personal");
-
-  // تأكد إن القيم منطقية
-  const types = ["study", "project", "meeting", "review", "personal"];
-  if (day < 0 || day > 6 || start < 8 || end > 19 || end <= start || !types.includes(type)) {
-    alert("فيه قيمة غلط، جربي تاني");
-    return;
-  }
-
-  sessions.push({ title: title, type: type, day: day, start: start, end: end });
-
-  updateCards();   // الأرقام فوق تتحدث
-  renderTable();   // الجدول يترسم من جديد
-});
-
-// ==========================================
-// 8) شغّل كل حاجة أول ما الصفحة تفتح
-// ==========================================
-updateCards();
-renderTable();
+loadWeek();

@@ -1,0 +1,121 @@
+/* Dark mode, shared by every page.
+   - the switch button (moon / sun)
+   - dark colours for the login and contact pages
+   The app pages (tasks, planner, ...) have theirs at the end of app.css,
+   the home page at the end of home.css, the dashboard in dashboard.css.
+   Dark mode = class "dark-mode" on <html>, set by js/utils/theme.js. */
+
+/* ========== the switch button ========== */
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid #d3e1cf;
+  border-radius: 50%;
+  background-color: #f4f8f1;
+  color: #1f4a33;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.theme-toggle:hover {
+  background-color: #dbe9d6;
+  transform: rotate(12deg);
+}
+
+.theme-toggle .icon-sun { display: none; }
+
+/* pinned to the corner on pages that have no top bar (login, contact) */
+.theme-toggle.floating {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+}
+
+html.dark-mode .theme-toggle {
+  background-color: #1d2a22;
+  border-color: #2e3f35;
+  color: #f2d27a;
+}
+
+html.dark-mode .theme-toggle:hover { background-color: #26382e; }
+html.dark-mode .theme-toggle .icon-moon { display: none; }
+html.dark-mode .theme-toggle .icon-sun { display: block; }
+
+html.dark-mode { color-scheme: dark; }
+html.dark-mode body { background-color: #121815; color: #e4ede7; }
+
+/* ========== login page ========== */
+html.dark-mode body.auth-page { background-color: #121815; color: #e4ede7; }
+html.dark-mode .auth-card { background-color: #1a241e; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); }
+html.dark-mode .auth-card:hover { box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6); }
+html.dark-mode .tabs { background-color: #202c25; }
+html.dark-mode .tabs label { color: #cfe3cf; }
+html.dark-mode .tabs label:hover { background-color: #2a3b30; }
+html.dark-mode .auth-form h2 { color: #e4ede7; }
+html.dark-mode .auth-form input { background-color: #121815; border-color: #2e3f35; color: #e4ede7; }
+html.dark-mode .auth-form input::placeholder { color: #6f8277; }
+html.dark-mode .auth-form input:focus { border-color: #6f9a68; box-shadow: 0 0 0 3px rgba(111, 154, 104, 0.25); }
+html.dark-mode .back-home { color: #9ac296; }
+html.dark-mode .back-home:hover { color: #cfe3cf; }
+html.dark-mode .muted { color: #9cb0a3; }
+html.dark-mode .form-error { color: #ff8a80; }
+
+/* ========== contact page ========== */
+html.dark-mode .brand { color: #e4ede7; }
+html.dark-mode .contact_label { background-color: #1d2a22; border-color: #2e3f35; color: #cfe3cf; }
+html.dark-mode .contact_heading,
+html.dark-mode .contact_heading .first { color: #e4ede7; }
+html.dark-mode .contact_heading .second { color: #9ac296; }
+html.dark-mode .contact_description { color: #9cb0a3; }
+html.dark-mode .contact_item > i { background-color: #1d2a22; color: #9ac296; }
+html.dark-mode .contact_item p { color: #e4ede7; }
+html.dark-mode .contact_item span { color: #9cb0a3; }
+
+html.dark-mode .contact_form_card {
+  background-color: #1a241e;
+  border-color: #26382e;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+}
+
+html.dark-mode .contact_form_card:hover { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.55); }
+html.dark-mode .contact_form_card h2 { color: #e4ede7; }
+html.dark-mode .form_description { color: #9cb0a3; }
+
+html.dark-mode .input_box,
+html.dark-mode .input_box_subject_box,
+html.dark-mode .input_box_message_box { background-color: #121815; border-color: #2e3f35; }
+
+html.dark-mode .input_box > i { color: #9cb0a3; }
+html.dark-mode .input_box input,
+html.dark-mode .input_box select,
+html.dark-mode .input_box textarea,
+html.dark-mode .input_box_subject_box select,
+html.dark-mode .input_box_message_box textarea { color: #e4ede7; }
+
+html.dark-mode .input_box input::placeholder,
+html.dark-mode .input_box textarea::placeholder,
+html.dark-mode .input_box_message_box textarea::placeholder { color: #6f8277; }
+
+html.dark-mode .input_box_subject_box select option { background-color: #1a241e; color: #e4ede7; }
+
+html.dark-mode .input_box:focus-within { background-color: #121815; border-color: #6f9a68; box-shadow: 0 0 0 3px rgba(111, 154, 104, 0.2); }
+
+html.dark-mode .input_box.is-valid,
+html.dark-mode .input_box_subject_box.is-valid,
+html.dark-mode .input_box_message_box.is-valid { border-color: #4f8a5b; background-color: #14231a; }
+
+html.dark-mode .input_box.is-invalid,
+html.dark-mode .input_box_subject_box.is-invalid,
+html.dark-mode .input_box_message_box.is-invalid { border-color: #c94a4a; background-color: #2a1717; }
+
+html.dark-mode .field_error_msg,
+html.dark-mode .form_status_msg.error { color: #ff8a80; }
+html.dark-mode .form_status_msg.success { color: #7fd08b; }
+
+html.dark-mode .send_button { background-color: #6f9a68; color: #0f1a13; }
+html.dark-mode .send_button:hover { background-color: #7fab78; box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4); }
