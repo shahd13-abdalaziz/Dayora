@@ -21,7 +21,7 @@
 
   // [link, icon classes, label]  - the menu, in order
   var MENU = [
-    ['../index.html', 'fa-solid fa-house', 'Home'],
+    ['home.html', 'fa-solid fa-house', 'Home'],
     ['tasks.html', 'fa-regular fa-square-check', 'Tasks'],
     ['planner.html', 'fa-regular fa-calendar', 'Calendar'],
     ['habits.html', 'fa-solid fa-seedling', 'Habits'],
@@ -42,7 +42,7 @@
   aside.className = 'app-sidebar';
   aside.id = 'appSidebar';
   aside.innerHTML =
-    '<a href="../index.html" class="app-brand"><img src="' + logo + '" alt=""><span>Dayora</span></a>' +
+    '<a href="home.html" class="app-brand"><img src="' + logo + '" alt=""><span>Dayora</span></a>' +
     '<nav class="app-nav" aria-label="Main menu">' + links + '</nav>' +
     '<div class="app-sidebar_bottom">' +
       '<div class="app-divider"></div>' +
@@ -67,7 +67,7 @@
   topbar.className = 'app-mobilebar';
   topbar.innerHTML =
     '<button type="button" class="app-mobilebar_btn" id="appMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="appSidebar"><i class="fa-solid fa-bars"></i></button>' +
-    '<a href="../index.html" class="app-brand"><img src="' + logo + '" alt=""><span>Dayora</span></a>';
+    '<a href="home.html" class="app-brand"><img src="' + logo + '" alt=""><span>Dayora</span></a>';
   var backdrop = document.createElement('div');
   backdrop.className = 'app-backdrop';
 
