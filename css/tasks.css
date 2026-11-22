@@ -1,0 +1,150 @@
+/* ========== الفلاتر (القوائم) ========== */
+.select {
+  height: 44px;
+  padding: 0 14px;
+  background: #f4f8f1;
+  border: 1px solid #d3e1cf;
+  border-radius: 14px;
+  color: #1f4a33;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ========== اللوحة: 3 أعمدة جنب بعض ========== */
+.board {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.column {
+  flex: 1;
+  padding: 16px;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* لون كل عمود (نفس ألوان الجلسات في الـ Planner) */
+.todo     { background: #dbe9d6; border: 1px solid #c9dcc3; }
+.progress { background: #f2e7d2; border: 1px solid #e6d8b9; }
+.done     { background: #d3e8e3; border: 1px solid #bfdad4; }
+
+/* عنوان العمود */
+.col-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px 4px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.todo .col-head     { color: #2e5f44; }
+.progress .col-head { color: #7a5a22; }
+.done .col-head     { color: #1f5a55; }
+
+.col-head .count {
+  padding: 2px 10px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+}
+
+/* الصندوق اللي بتتحط فيه الكروت (الـ JS بيملاه) */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ========== كارت المهمة ========== */
+.card {
+  cursor: pointer;
+  background: #f4f8f1;
+  border: 1px solid #d3e1cf;
+  border-radius: 14px;
+  padding: 14px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #1f4a33;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* شارة الأولوية */
+.pill {
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.high   { background: #f4e0d6; color: #8a4a30; }
+.medium { background: #f2e7d2; color: #7a5a22; }
+.low    { background: #dbe9d6; color: #2e5f44; }
+
+/* التاريخ */
+.date {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #5d6f62;
+}
+
+.date img {
+  width: 14px;
+  height: 14px;
+}
+
+/* الصورة الصغيرة + علامة الصح */
+.card-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mini-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #1f4a33;
+}
+
+.check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #608359;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
