@@ -1,0 +1,270 @@
+﻿/* The sidebar shared by every app page (see js/sidebar.js): the dashboard's original sidebar.
+   Light: sand-green. Dark: html.dark-mode (switched by js/utils/theme.js). */
+
+.app-sidebar {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  flex: 0 0 270px;
+  width: 270px;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 22px 16px;
+  overflow-y: auto;
+  background-color: #e7eee3;
+  border-right: 1px solid #dce5d8;
+  color: #294b3b;
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  z-index: 40;
+}
+
+.app-sidebar a { text-decoration: none; }
+
+/* ---------- brand ---------- */
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+  color: #294b3b;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.app-brand img { width: 48px; height: 48px; object-fit: contain; }
+
+/* ---------- menu ---------- */
+.app-nav { display: flex; flex-direction: column; gap: 4px; }
+
+.app-nav_item {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 10px 16px;
+  border-radius: 13px;
+  color: #526b59;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.app-nav_item i { width: 23px; font-size: 19px; text-align: center; }
+
+.app-nav_item:hover,
+.app-nav_item.active {
+  background-color: #d5e3d1;
+  color: #294b3b;
+  transform: translateX(3px);
+}
+
+/* ---------- bottom: login / theme / user ---------- */
+.app-sidebar_bottom { margin-top: auto; padding-top: 18px; }
+.app-divider { height: 1px; background-color: #ccd9c8; margin-bottom: 18px; }
+
+.app-auth { display: flex; gap: 10px; }
+
+.app-auth_btn {
+  flex: 1;
+  box-sizing: border-box;
+  padding: 11px 5px;
+  border-radius: 25px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.app-auth_primary { background-color: #587653; color: #fff; border: 1px solid #587653; }
+.app-auth_primary:hover { background-color: #42613e; }
+.app-auth_outline { background-color: transparent; color: #587653; border: 1px solid #587653; }
+.app-auth_outline:hover { background-color: #d5e3d1; }
+
+.theme-btn {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 13px 0 0;
+  padding: 12px;
+  border: 1px solid #cbd9c8;
+  border-radius: 25px;
+  background-color: #f5f8f1;
+  color: #294b3b;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.theme-btn:hover { background-color: #d5e3d1; }
+.theme-btn i { color: #d6a33a; font-size: 16px; }
+.theme-btn .icon-sun { display: none; }
+
+.app-user {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 16px;
+  padding: 14px 5px 0;
+  border-top: 1px solid #ccd9c8;
+}
+
+.sb-avatar {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #587653;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-user_text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.app-user_text span { font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.app-user_text small { font-size: 10px; color: #829087; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.app-user_more { color: #829087; font-size: 16px; padding: 6px; border-radius: 8px; }
+.app-user_more:hover { background-color: #d5e3d1; color: #294b3b; }
+
+/* the big seedling at the bottom: only when the screen is tall enough */
+.app-sidebar_foot { margin-top: 10px; padding: 14px 5px 4px; text-align: center; color: #547b60; }
+.app-sidebar_foot i { font-size: 56px; margin-bottom: 12px; }
+.app-sidebar_foot p { margin: 0; font-size: 14px; font-style: italic; line-height: 1.6; color: #547b60; }
+.app-sidebar_foot span { display: block; font-size: 15px; margin-top: 6px; }
+
+@media (max-height: 940px) {
+  .app-sidebar_foot { display: none; }
+}
+
+/* short screens (laptops): tighter spacing so the whole menu fits without scrolling */
+@media (max-height: 860px) and (min-width: 901px) {
+  .app-sidebar { padding-top: 18px; padding-bottom: 10px; }
+  .app-brand { margin-bottom: 12px; }
+  .app-nav { gap: 2px; }
+  .app-nav_item { padding: 7px 14px; font-size: 14px; }
+  .app-nav_item i { font-size: 17px; }
+  .app-sidebar_bottom { padding-top: 10px; }
+  .app-divider { margin-bottom: 12px; }
+  .app-auth_btn { padding: 9px 5px; }
+  .theme-btn { margin-top: 9px; padding: 10px; }
+  .app-user { margin-top: 10px; padding-top: 10px; }
+}
+
+/* ---------- the pages next to the sidebar ---------- */
+.app .main,
+.dashboard-layout .main-content { min-width: 0; }
+
+.no-scroll { overflow: hidden; }
+
+/* ---------- phone top bar (hidden on big screens) ---------- */
+.app-mobilebar,
+.app-backdrop { display: none; }
+
+@media (max-width: 900px) {
+  .app,
+  .dashboard-layout { flex-direction: column; }
+
+  .app-mobilebar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 60px;
+    padding: 0 14px;
+    box-sizing: border-box;
+    background-color: #e7eee3;
+    border-bottom: 1px solid #dce5d8;
+    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  }
+
+  .app-mobilebar .app-brand { margin: 0; font-size: 20px; text-decoration: none; }
+  .app-mobilebar .app-brand img { width: 34px; height: 34px; }
+
+  .app-mobilebar_btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid #cbd9c8;
+    border-radius: 12px;
+    background-color: #f5f8f1;
+    color: #294b3b;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  /* the sidebar slides in from the left */
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: auto;
+    width: 290px;
+    max-width: 88vw;
+    flex: none;
+    transform: translateX(-102%);
+    transition: transform 0.25s ease;
+  }
+
+  .app-sidebar.open { transform: none; box-shadow: 12px 0 30px rgba(0, 0, 0, 0.25); }
+
+  .app-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    background: rgba(0, 0, 0, 0.45);
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+
+  .app-backdrop.show { opacity: 1; pointer-events: auto; }
+}
+
+/* =========================================
+   Dark mode
+   ========================================= */
+html.dark-mode .app-sidebar { background-color: #18251D; border-right-color: #26382e; color: #e4ede7; }
+html.dark-mode .app-brand { color: #e4ede7; }
+html.dark-mode .app-nav_item { color: #9cb0a3; }
+html.dark-mode .app-nav_item:hover,
+html.dark-mode .app-nav_item.active { background-color: #243529; color: #fff; }
+html.dark-mode .app-divider,
+html.dark-mode .app-user { border-color: #26382e; background-color: transparent; }
+html.dark-mode .app-divider { background-color: #26382e; }
+html.dark-mode .app-auth_primary { background-color: #6f9a68; border-color: #6f9a68; color: #0f1a13; }
+html.dark-mode .app-auth_primary:hover { background-color: #7fab78; }
+html.dark-mode .app-auth_outline { color: #cfe3cf; border-color: #6f9a68; }
+html.dark-mode .app-auth_outline:hover { background-color: #243529; }
+html.dark-mode .theme-btn { background-color: #202c25; border-color: #2e3f35; color: #e4ede7; }
+html.dark-mode .theme-btn:hover { background-color: #2a3b30; }
+html.dark-mode .theme-btn .icon-moon { display: none; }
+html.dark-mode .theme-btn .icon-sun { display: inline-block; }
+html.dark-mode .sb-avatar { background-color: #2e5f44; }
+html.dark-mode .app-user_text small,
+html.dark-mode .app-user_more { color: #889c8f; }
+html.dark-mode .app-user_more:hover { background-color: #243529; color: #fff; }
+html.dark-mode .app-sidebar_foot,
+html.dark-mode .app-sidebar_foot p { color: #9ac296; }
+
+@media (max-width: 900px) {
+  html.dark-mode .app-mobilebar { background-color: #18251D; border-bottom-color: #26382e; }
+  html.dark-mode .app-mobilebar_btn { background-color: #202c25; border-color: #2e3f35; color: #e4ede7; }
+  html.dark-mode .app-sidebar.open { box-shadow: 12px 0 30px rgba(0, 0, 0, 0.6); }
+}

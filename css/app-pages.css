@@ -1,0 +1,95 @@
+/* Dark mode and small screens for the Tasks and Planner pages (the dashboard has its own in dashboard.css).
+   Dark mode = class "dark-mode" on <html>, switched by js/utils/theme.js.
+   Colours follow the dashboard's dark theme: page #121815 - panels #1a241e - borders #26382e / #2e3f35 - text #e4ede7. */
+
+/* ========== dark mode ========== */
+html.dark-mode body { background-color: #121815; color: #e4ede7; }
+
+html.dark-mode .search,
+html.dark-mode .bell,
+html.dark-mode .week-nav,
+html.dark-mode .today-btn,
+html.dark-mode .select {
+  background-color: #1a241e;
+  border-color: #2e3f35;
+  color: #e4ede7;
+}
+
+html.dark-mode .search input { color: #e4ede7; }
+html.dark-mode .search input::placeholder { color: #7d9186; }
+html.dark-mode .dot { border-color: #1a241e; }
+html.dark-mode .avatar { background-color: #2e5f44; }
+
+/* the dark-green icons are images: make them light grey so they do not vanish on a dark background */
+html.dark-mode .search img,
+html.dark-mode .bell img,
+html.dark-mode .arrow img,
+html.dark-mode .date img,
+html.dark-mode .stat-card .icon img { filter: brightness(0) invert(0.85); }
+
+html.dark-mode .user-role,
+html.dark-mode .page-head p,
+html.dark-mode .stat-card h3,
+html.dark-mode .note,
+html.dark-mode .day-name small,
+html.dark-mode .hours span,
+html.dark-mode .date { color: #9cb0a3; }
+
+html.dark-mode .number,
+html.dark-mode .user-name { color: #e4ede7; }
+
+html.dark-mode .stat-card,
+html.dark-mode .week-card { background-color: #1a241e; border-color: #26382e; }
+html.dark-mode .stat-card .icon { background-color: #26382e; }
+
+/* planner */
+html.dark-mode .chip { background-color: #1a241e; border-color: #2e3f35; color: #cfe3cf; }
+html.dark-mode .chip-active { background-color: #6f9a68; border-color: #6f9a68; color: #0f1a13; }
+html.dark-mode .grid { border-top-color: #26382e; }
+html.dark-mode .day {
+  border-left-color: #26382e;
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 63px, #26382e 63px, #26382e 64px);
+}
+html.dark-mode .today { background-color: #1b2a21; }
+html.dark-mode .today-num { background-color: #6f9a68; color: #0f1a13; }
+html.dark-mode .session { filter: brightness(0.92); }
+
+/* task board */
+html.dark-mode .todo { background-color: #18261d; border-color: #26382e; }
+html.dark-mode .progress { background-color: #272417; border-color: #3b3620; }
+html.dark-mode .done { background-color: #16292a; border-color: #23403f; }
+html.dark-mode .todo .col-head { color: #9ac296; }
+html.dark-mode .progress .col-head { color: #e0c27a; }
+html.dark-mode .done .col-head { color: #7cc7bf; }
+html.dark-mode .col-head .count { background-color: rgba(255, 255, 255, 0.1); }
+html.dark-mode .card { background-color: #202c25; border-color: #2e3f35; }
+html.dark-mode .card-title { color: #e4ede7; }
+html.dark-mode .pill.high, html.dark-mode .high { background-color: #4a2c22; color: #f0b9a2; }
+html.dark-mode .pill.medium, html.dark-mode .medium { background-color: #463b1c; color: #ecd08a; }
+html.dark-mode .pill.low, html.dark-mode .low { background-color: #23402d; color: #a7d6a8; }
+
+/* ========== tablets and phones (the sidebar becomes a drawer: see sidebar.css) ========== */
+@media (max-width: 900px) {
+  .main { padding: 16px; }
+  .topbar { flex-wrap: wrap; gap: 12px; }
+  .search { width: auto; flex: 1 1 220px; }
+  .page-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .tools { flex-wrap: wrap; }
+  .stats { flex-wrap: wrap; }
+  .stat-card { flex: 1 1 calc(50% - 16px); min-width: 200px; }
+  .board { flex-direction: column; }
+  .column { width: 100%; box-sizing: border-box; }
+  .row { flex-direction: column; }
+
+  /* the weekly grid keeps its size and scrolls sideways instead of getting squashed */
+  .week-card { overflow-x: auto; }
+  .week-card .week-top { flex-wrap: wrap; gap: 10px; }
+  .chips { flex-wrap: wrap; }
+  .week-card .days-head,
+  .week-card .grid { min-width: 760px; }
+}
+
+@media (max-width: 600px) {
+  .stat-card { flex-basis: 100%; }
+  .week-nav { flex-wrap: wrap; }
+}
