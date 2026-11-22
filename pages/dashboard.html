@@ -11,83 +11,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <script src="../js/utils/theme.js"></script>
 </head>
 <body>
     <div class="dashboard-layout">
         <!-- Sidebar -->
-        <aside class="sidebar">
-            <!-- Logo -->
-            <a href="../index.html" class="brand">
-                <img src="../imgs/file_00000000322c8210980e21a958c092d7.png" alt="Dayora Logo">
-                <span>Dayora</span>
-            </a>
-            <!-- Navigation -->
-            <nav class="sidebar-nav">
-                <a href="../index.html" class="nav-item">
-                    <i class="fa-solid fa-house"></i>
-                    <span>Home</span>
-                </a>
-                <a href="tasks.html" class="nav-item">
-                    <i class="fa-regular fa-square-check"></i>
-                    <span>Tasks</span>
-                </a>
-                <a href="calendar.html" class="nav-item">
-                    <i class="fa-regular fa-calendar"></i>
-                    <span>Calendar</span>
-                </a>
-                <a href="habits.html" class="nav-item">
-                    <i class="fa-solid fa-seedling"></i>
-                    <span>Habits</span>
-                </a>
-                <a href="notes.html" class="nav-item">
-                    <i class="fa-regular fa-note-sticky"></i>
-                    <span>Notes</span>
-                </a>
-                <a href="contact.html" class="nav-item">
-                    <i class="fa-regular fa-user"></i>
-                    <span>Contact-Us</span>
-                </a>
-            </nav>
-            <!-- Sidebar Bottom -->
-            <div class="sidebar-bottom">
-                <div class="sidebar-divider"></div>
-                <!-- Login & Register -->
-                <div class="auth-buttons">
-                    <a href="login.html" class="login-btn">
-                        Login
-                    </a>
-                    <a href="register.html" class="register-btn">
-                        Register
-                    </a>
-                </div>
-                <!-- Theme Button -->
-                <button class="theme-btn" type="button" id="theme-btn">
-                    <i class="fa-solid fa-sun"></i>
-                    <span>Light Mode</span>
-                </button>
-                <!-- User Profile -->
-                <div class="user-profile">
-                    <div class="profile-avatar" id="profileAvatar">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="profile-info">
-                        <span id="profileName">User Name</span>
-                        <small id="profileEmail">user@email.com</small>
-                    </div>
-                    <i class="fa-solid fa-ellipsis"></i>
-                </div>
-            </div>
-            <div class="sidebar-footer">
-    <i class="fa-solid fa-seedling"></i>
-    <p>Small Steps, Big Progress</p>
-    <span>❤️</span>
-</div>
-        </aside>
+        <div id="app-sidebar"></div>
         <!-- Empty Main Area -->
         <main class="main-content">
             <!-- Your other pages will be connected here -->
         </main>
     </div>
-    <script src="../js/utils/theme.js"></script>
+    
+    <script src="../js/sidebar.js"></script>
 </body>
 </html>

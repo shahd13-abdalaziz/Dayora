@@ -2,56 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dayora</title>
   <link rel="stylesheet" href="../css/planner.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/app-pages.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="../js/utils/theme.js"></script>
 </head>
 <body>
 
   <div class="app">
 
     <!-- ========== الشريط الأخضر اللي على الجنب ========== -->
-    <div class="sidebar">
-
-      <div class="logo">
-        <img src="https://api.iconify.design/lucide/sprout.svg?color=%23ffffff" alt="logo">
-        <span>Dayora</span>
-      </div>
-
-      <div class="menu">
-        <a href="dashboard.html" class="menu-link">
-          <img src="https://api.iconify.design/lucide/layout-dashboard.svg?color=%23cfe3cf" alt="">
-          Dashboard
-        </a>
-        <a href="tasks.html" class="menu-link">
-          <img src="https://api.iconify.design/lucide/list-checks.svg?color=%23cfe3cf" alt="">
-          Tasks
-        </a>
-        <a href="planner.html" class="menu-link active">
-          <img src="https://api.iconify.design/lucide/calendar.svg?color=%231f4a33" alt="">
-          Planner
-        </a>
-        <a href="focus.html" class="menu-link">
-          <img src="https://api.iconify.design/lucide/timer.svg?color=%23cfe3cf" alt="">
-          Focus Room
-        </a>
-        <a href="analytics.html" class="menu-link">
-          <img src="https://api.iconify.design/lucide/activity.svg?color=%23cfe3cf" alt="">
-          Analytics
-        </a>
-        <a href="settings.html" class="menu-link">
-          <img src="https://api.iconify.design/lucide/settings.svg?color=%23cfe3cf" alt="">
-          Settings
-        </a>
-      </div>
-
-      <a href="../index.html" class="menu-link">
-        <img src="https://api.iconify.design/lucide/log-out.svg?color=%23cfe3cf" alt="">
-        Log Out
-      </a>
-
-    </div>
-
-    <!-- ========== الجزء الرئيسي ========== -->
+    <div id="app-sidebar"></div>
     <div class="main">
 
       <!-- الصف الأول: بحث + إشعارات + المستخدم -->
@@ -215,5 +179,6 @@
   </div>
 
   <script src="../js/planner.js"></script>
+  <script src="../js/sidebar.js"></script>
 </body>
 </html>
