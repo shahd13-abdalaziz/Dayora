@@ -1,136 +1,132 @@
-// ==========================================
-// 1) البيانات (هنا بتغير المهام)
-// ==========================================
-// status: "todo" أو "progress" أو "done"
-// priority: "high" أو "medium" أو "low"
-const tasks = [
-  { title: "Design landing page",   priority: "high",   status: "todo",     date: "Apr 20" },
-  { title: "Write project docs",    priority: "medium", status: "todo",     date: "Apr 25" },
-  { title: "Fix responsive issues", priority: "low",    status: "todo",     date: "Apr 25" },
-  { title: "Prepare presentation",  priority: "medium", status: "todo",     date: "Apr 28" },
+// Task board (pages/tasks.html). The tasks live on the server; this file draws them.
 
-  { title: "Build dashboard",       priority: "high",   status: "progress", date: "Apr 18" },
-  { title: "API integration",       priority: "medium", status: "progress", date: "Apr 19" },
-  { title: "Test components",       priority: "low",    status: "progress", date: "Apr 23" },
+const STATUSES = ['todo', 'progress', 'done'];          // column order
+const PRIORITIES = [['high', 'High'], ['medium', 'Medium'], ['low', 'Low']];
 
-  { title: "Setup project repo",    priority: "low",    status: "done",     date: "Apr 15" },
-  { title: "Create wireframes",     priority: "medium", status: "done",     date: "Apr 12" },
-  { title: "Install dependencies",  priority: "low",    status: "done",     date: "Apr 10" }
-];
+let tasks = [];                // everything we got from the server
+let priorityFilter = 'all';
+let statusFilter = 'all';
+let searchText = '';
 
-// ترتيب الأعمدة
-const statuses = ["todo", "progress", "done"];
-
-// 
-const avatarUrl = "https://api.dicebear.com/9.x/avataaars/svg?seed=Ahmed&backgroundColor=dbe9d6&top=shortFlat&hairColor=2c1b18&facialHair=beardLight&facialHairProbability=100&mouth=smile&clothing=hoodie&clothesColor=2e5f44&skinColor=edb98a";
-
-// ==========================================
-// 2) حالة الصفحة (اللي بتتغير لما المستخدم يستخدم الفلاتر)
-// ==========================================
-let priorityFilter = "all";
-let statusFilter = "all";
-let searchText = "";
-
-// ==========================================
-// 3) هل المهمة دي تظهر ولا لأ؟ (بتشوف الفلاتر والبحث)
-// ==========================================
+// ---------- what is visible right now ----------
 function isVisible(task) {
-  if (priorityFilter !== "all" && task.priority !== priorityFilter) return false;
-  if (statusFilter !== "all" && task.status !== statusFilter) return false;
-  if (!task.title.toLowerCase().includes(searchText.toLowerCase())) return false;
-  return true;
+  if (priorityFilter !== 'all' && task.priority !== priorityFilter) return false;
+  if (statusFilter !== 'all' && task.status !== statusFilter) return false;
+  return task.title.toLowerCase().includes(searchText.toLowerCase());
 }
 
-// ==========================================
-// 4) بناء كارت واحد
-// ==========================================
-function makeCard(task, index) {
-  const card = document.createElement("div");
-  card.className = "card";
+// ---------- one card ----------
+function makeCard(task) {
+  const late = task.status !== 'done' && task.dueDate && task.dueDate < App.ymd();
 
-  // علامة الصح بتظهر بس في Done
-  const check = task.status === "done" ? '<div class="check">✓</div>' : "";
+  const actions = App.el('div', { class: 'card-actions' },
+    App.el('button', {
+      class: 'icon-btn', title: 'Edit', 'aria-label': `Edit ${task.title}`, text: '✎',
+      onclick: (e) => { e.stopPropagation(); openTaskForm(task); },
+    }),
+    App.el('button', {
+      class: 'icon-btn', title: 'Delete', 'aria-label': `Delete ${task.title}`, text: '🗑',
+      onclick: (e) => { e.stopPropagation(); removeTask(task); },
+    }));
 
-  card.innerHTML =
-    '<h4 class="card-title">' + task.title + "</h4>" +
-    '<div class="card-bottom">' +
-      '<div class="card-info">' +
-        '<span class="pill ' + task.priority + '">' + task.priority + "</span>" +
-        '<span class="date"><img src="https://api.iconify.design/lucide/calendar.svg?color=%235d6f62" alt="">' + task.date + "</span>" +
-      "</div>" +
-      '<div class="card-right"><img class="mini-avatar" src="' + avatarUrl + '" alt="AM">' + check + "</div>" +
-    "</div>";
+  const card = App.el('div', { class: `card${late ? ' overdue' : ''}`, title: 'Click to move to the next column' },
+    App.el('h4', { class: 'card-title', text: task.title }),
+    task.description ? App.el('p', { class: 'card-desc', text: task.description }) : null,
+    App.el('div', { class: 'card-bottom' },
+      App.el('div', { class: 'card-info' },
+        App.el('span', { class: `pill ${task.priority}`, text: task.priority }),
+        App.el('span', { class: `date${late ? ' late' : ''}`, text: `${App.shortDate(task.dueDate)}${late ? ' · overdue' : ''}` })),
+      App.el('div', { class: 'card-right' },
+        actions,
+        task.status === 'done' ? App.el('div', { class: 'check', text: '✓' }) : null)));
 
-  // لما تدوسي على الكارت يتنقل للعمود اللي بعده
-  card.addEventListener("click", function () {
-    const next = (statuses.indexOf(task.status) + 1) % statuses.length;
-    tasks[index].status = statuses[next];
-    render();
-  });
-
+  // Clicking the card moves it to the next column (To Do -> In Progress -> Done -> To Do).
+  card.addEventListener('click', () => moveToNextColumn(task));
   return card;
 }
 
-// ==========================================
-// 5) رسم اللوحة كلها من البيانات
-// ==========================================
+// ---------- the whole board ----------
 function render() {
-  statuses.forEach(function (status) {
-    const list = document.getElementById("list-" + status);
-    list.innerHTML = "";          // امسح اللي فيه الأول
-    let count = 0;
+  for (const status of STATUSES) {
+    const list = document.getElementById(`list-${status}`);
+    list.replaceChildren();
+    const mine = tasks.filter((t) => t.status === status && isVisible(t));
+    mine.forEach((t) => list.append(makeCard(t)));
+    if (!mine.length) list.append(App.el('div', { class: 'empty', text: 'Nothing here' }));
+    document.getElementById(`count-${status}`).textContent = mine.length;
+  }
+}
 
-    tasks.forEach(function (task, index) {
-      if (task.status !== status) return;   // مش من العمود ده
-      if (!isVisible(task)) return;         // الفلتر مخبيها
+// ---------- talking to the server ----------
+async function moveToNextColumn(task) {
+  const old = task.status;
+  const next = STATUSES[(STATUSES.indexOf(old) + 1) % STATUSES.length];
+  task.status = next;            // show it at once...
+  render();
+  try {
+    const { task: saved } = await Api.patch(`/tasks/${task.id}/status`, { status: next });
+    Object.assign(task, saved);
+  } catch (err) {
+    task.status = old;           // ...and put it back if the server refused
+    App.showError(err);
+  }
+  render();
+}
 
-      list.appendChild(makeCard(task, index));
-      count++;
-    });
+async function removeTask(task) {
+  if (!(await App.confirm(`"${task.title}" will be deleted for good.`))) return;
+  try {
+    await Api.del(`/tasks/${task.id}`);
+    tasks = tasks.filter((t) => t.id !== task.id);
+    render();
+    App.toast('Task deleted');
+  } catch (err) {
+    App.showError(err);
+  }
+}
 
-    document.getElementById("count-" + status).textContent = count;
+/** Add (task = null) or edit a task in one pop-up. */
+function openTaskForm(task = null) {
+  App.form({
+    title: task ? 'Edit task' : 'New task',
+    submit: task ? 'Save changes' : 'Add task',
+    values: task
+      ? { title: task.title, description: task.description, priority: task.priority, status: task.status, dueDate: task.dueDate || '' }
+      : { priority: 'medium', status: 'todo' },
+    fields: [
+      { name: 'title', label: 'Task name', required: true, max: 200 },
+      { name: 'description', label: 'Notes (optional)', type: 'textarea', max: 2000 },
+      { name: 'priority', label: 'Priority', type: 'select', options: PRIORITIES },
+      { name: 'status', label: 'Column', type: 'select', options: [['todo', 'To Do'], ['progress', 'In Progress'], ['done', 'Done']] },
+      { name: 'dueDate', label: 'Due date (optional)', type: 'date' },
+    ],
+    onSubmit: async (v) => {
+      const body = { ...v, dueDate: v.dueDate || null };
+      if (task) {
+        const { task: saved } = await Api.put(`/tasks/${task.id}`, body);
+        Object.assign(task, saved);
+      } else {
+        const { task: created } = await Api.post('/tasks', body);
+        tasks.push(created);
+      }
+      render();
+      App.toast(task ? 'Task updated' : 'Task added');
+    },
   });
 }
 
-// ==========================================
-// 6) الفلاتر والبحث
-// ==========================================
-document.getElementById("filter-priority").addEventListener("change", function (e) {
-  priorityFilter = e.target.value;
-  render();
-});
+// ---------- filters, search, add button ----------
+document.getElementById('filter-priority').addEventListener('change', (e) => { priorityFilter = e.target.value; render(); });
+document.getElementById('filter-status').addEventListener('change', (e) => { statusFilter = e.target.value; render(); });
+document.getElementById('search').addEventListener('input', (e) => { searchText = e.target.value; render(); });
+document.getElementById('add-btn').addEventListener('click', () => openTaskForm());
 
-document.getElementById("filter-status").addEventListener("change", function (e) {
-  statusFilter = e.target.value;
-  render();
-});
-
-document.getElementById("search").addEventListener("input", function (e) {
-  searchText = e.target.value;
-  render();
-});
-
-// ==========================================
-// 7) زرار Add Task
-// ==========================================
-document.getElementById("add-btn").addEventListener("click", function () {
-  const title = prompt("اسم المهمة؟");
-  if (!title) return;
-
-  const priority = prompt("الأولوية؟ high / medium / low");
-  const date = prompt("الموعد؟ (مثلا Apr 30)");
-
-  if (!["high", "medium", "low"].includes(priority) || !date) {
-    alert("فيه قيمة غلط، جربي تاني");
-    return;
+// ---------- start ----------
+(async function start() {
+  try {
+    ({ tasks } = await Api.get('/tasks'));
+  } catch (err) {
+    App.showError(err);
   }
-
-  // المهمة الجديدة بتبدأ في To Do
-  tasks.push({ title: title, priority: priority, status: "todo", date: date });
   render();
-});
-
-// ==========================================
-// 8) شغّل كل حاجة أول ما الصفحة تفتح
-// ==========================================
-render();
+})();
