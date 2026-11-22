@@ -16,6 +16,7 @@ p{
 .image img{
     width: 100%;
     display: block;
+    border-radius: 50px;
 }
 .bages{
     background-color:#DFE9D8 ;
