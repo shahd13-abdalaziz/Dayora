@@ -38,6 +38,38 @@ a {
   transform: none;
 }
 
+/* ===== "Continue with Google" (shown only when the server has a Google client id) ===== */
+.google-section {
+  margin-top: 18px;
+}
+
+.google-section[hidden] {
+  display: none;
+}
+
+.or-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: #6b8472;
+  font-size: 13px;
+}
+
+.or-line::before,
+.or-line::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #cfe3cc;
+}
+
+.google-button {
+  display: flex;
+  justify-content: center;
+  min-height: 44px;
+}
+
 /* ===== Page ===== */
 .auth-page {
   min-height: 100vh;

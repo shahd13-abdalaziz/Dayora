@@ -5,6 +5,8 @@ using Dayora.Api.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Dayora.Api.Tests;
 
@@ -17,9 +19,19 @@ public class TestApp : WebApplicationFactory<Program>
     public string ConnectionString =>
         $"Server={SqlServerName};Database={_dbName};Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
 
+    /// <summary>The Google client id the test server is "configured" with. A test class can override it ("" = not set up).</summary>
+    protected virtual string GoogleClientId => "test-client-id.apps.googleusercontent.com";
+
     protected override void ConfigureWebHost(Microsoft.AspNetCore.Hosting.IWebHostBuilder builder)
     {
         builder.UseEnvironment("Development");
+        builder.UseSetting("Google:ClientId", GoogleClientId);
+        // Real Google tokens can only come from a browser, so the tests use a fake checker (see FakeGoogleValidator).
+        builder.ConfigureServices(services =>
+        {
+            services.RemoveAll<Dayora.Api.Infrastructure.IGoogleTokenValidator>();
+            services.AddSingleton<Dayora.Api.Infrastructure.IGoogleTokenValidator, FakeGoogleValidator>();
+        });
         builder.UseSetting("ConnectionStrings:Default", ConnectionString);
         builder.UseSetting("Jwt:Key", "tests-only-key-tests-only-key-tests-only-key");
         builder.UseSetting("RateLimit:AuthPerWindow", "100000");

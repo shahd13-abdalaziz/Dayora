@@ -25,6 +25,7 @@ var jwt = new JwtOptions
 };
 builder.Services.Configure<JwtOptions>(o => { o.Key = jwt.Key; o.Issuer = jwt.Issuer; o.ExpiresDays = jwt.ExpiresDays; });
 builder.Services.AddSingleton<TokenService>();
+builder.Services.AddSingleton<IGoogleTokenValidator, GoogleTokenValidator>();   // "Sign in with Google" (needs Google:ClientId)
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(o =>

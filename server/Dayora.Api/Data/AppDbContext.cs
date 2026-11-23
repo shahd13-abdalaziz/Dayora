@@ -18,7 +18,10 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             e.Property(x => x.Name).HasMaxLength(80);
             e.Property(x => x.Email).HasMaxLength(254);
             e.Property(x => x.PasswordHash).HasMaxLength(100);
+            e.Property(x => x.GoogleSubject).HasMaxLength(64);
             e.HasIndex(x => x.Email).IsUnique();
+            // one Google account can belong to one user only (many users have no Google account: that is fine)
+            e.HasIndex(x => x.GoogleSubject).IsUnique().HasFilter("[GoogleSubject] IS NOT NULL");
             e.HasOne(x => x.Settings).WithOne().HasForeignKey<UserSettings>(s => s.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         });

@@ -5,7 +5,10 @@ public class User
     public int Id { get; set; }
     public string Name { get; set; } = "";
     public string Email { get; set; } = "";
-    public string PasswordHash { get; set; } = "";
+    /// <summary>Null for an account that only signs in with Google (it has no password).</summary>
+    public string? PasswordHash { get; set; }
+    /// <summary>Google's id for this person ("sub"). Stays the same even if they change their e-mail.</summary>
+    public string? GoogleSubject { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public UserSettings? Settings { get; set; }

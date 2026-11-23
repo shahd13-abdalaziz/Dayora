@@ -14,7 +14,9 @@ public record UpdateProfileInput([Required, StringLength(80, MinimumLength = 2)]
 public record ChangePasswordInput(
     [Required] string CurrentPassword,
     [Required, StringLength(72, MinimumLength = 6)] string NewPassword);
-public record DeleteAccountInput([Required] string Password);
+/// <summary>An account with a password confirms with the password; a Google-only account confirms by typing its e-mail.</summary>
+public record DeleteAccountInput(string? Password, string? ConfirmEmail);
+public record GoogleLoginInput([Required, StringLength(8000)] string Credential);
 
 public record UserDto(int Id, string Name, string Email);
 public record AuthResult(string Token, UserDto User);
