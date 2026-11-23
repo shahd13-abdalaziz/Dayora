@@ -8,10 +8,11 @@
   <link rel="stylesheet" href="../css/tasks.css">
   <link rel="stylesheet" href="../css/sidebar.css">
   <link rel="stylesheet" href="../css/app-pages.css">
+  <link rel="stylesheet" href="../css/habits-notes.css">   <!-- pop-up forms, buttons and messages -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="../js/utils/theme.js"></script>
 </head>
-<body>
+<body data-protected>
   <div class="app">
 
     <!-- الشريط الأخضر (نفس بتاع الـ Planner، بس Tasks هي الـ active) -->
@@ -87,7 +88,12 @@
       </div>
     </div>
   </div>
-  <script src="../js/tasks.js"></script>
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/api.js"></script>
+  <script src="../js/utils/dates.js"></script>
+  <script src="../js/utils/ui.js"></script>
   <script src="../js/sidebar.js"></script>
+  <script src="../js/session.js"></script>
+  <script src="../js/tasks.js"></script>
 </body>
 </html>

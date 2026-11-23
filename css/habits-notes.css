@@ -58,6 +58,8 @@ dialog.modal p { margin: 0 0 8px; color: #5d6f62; font-size: 14px; line-height: 
 .field > label { font-size: 13px; font-weight: bold; }
 
 .field input[type="text"],
+.field input[type="date"],
+.field select,
 .field textarea {
   padding: 10px 12px;
   border: 1px solid #d3e1cf;
@@ -68,6 +70,8 @@ dialog.modal p { margin: 0 0 8px; color: #5d6f62; font-size: 14px; line-height: 
 }
 
 .field input[type="text"]:focus,
+.field input[type="date"]:focus,
+.field select:focus,
 .field textarea:focus { outline: 2px solid #608359; outline-offset: 0; }
 .field textarea { resize: vertical; }
 .field-error { color: #d64550; font-size: 12px; }
@@ -221,6 +225,8 @@ html.dark-mode dialog.modal { background: #1a241e; color: #e4ede7; border-color:
 html.dark-mode dialog.modal::backdrop { background: rgba(0, 0, 0, 0.6); }
 html.dark-mode dialog.modal p { color: #9cb0a3; }
 html.dark-mode .field input[type="text"],
+html.dark-mode .field input[type="date"],
+html.dark-mode .field select,
 html.dark-mode .field textarea { background: #121815; border-color: #2e3f35; color: #e4ede7; }
 html.dark-mode .field-error { color: #ff8a80; }
 html.dark-mode .swatch input:checked + span { border-color: #e4ede7; }

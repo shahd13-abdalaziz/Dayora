@@ -72,8 +72,12 @@ const UI = {
           f.options.map(([val, label, hex]) => this.el('label', { class: 'swatch', title: label },
             this.el('input', { type: 'radio', name: f.name, value: val, checked: val === value }),
             this.el('span', { style: { backgroundColor: hex } }))));
+      } else if (f.type === 'select') {
+        // options: [[value, label], ...]
+        control = this.el('select', { id, name: f.name },
+          f.options.map(([val, label]) => this.el('option', { value: val, text: label, selected: String(val) === String(value) })));
       } else {
-        control = this.el('input', { id, name: f.name, type: 'text', maxlength: f.max, autocomplete: 'off' });
+        control = this.el('input', { id, name: f.name, type: f.type === 'date' ? 'date' : 'text', maxlength: f.max, autocomplete: 'off' });
         control.value = value;
       }
       form.append(this.el('div', { class: 'field' },
@@ -95,17 +99,21 @@ const UI = {
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      // 1) read every field first, so validate(value, allValues) can compare fields with each other
       const data = {};
-      let ok = true;
       for (const f of fields) {
         const raw = form.elements[f.name].value;
-        const v = f.type === 'colors' ? raw : raw.trim();
-        data[f.name] = v;
+        data[f.name] = f.type === 'colors' || f.type === 'select' ? raw : raw.trim();
+      }
+      // 2) check them
+      let ok = true;
+      for (const f of fields) {
+        const v = data[f.name];
         let msg = '';
         if (f.required && !v) msg = 'This field is required';
         else if (f.min && v.length < f.min) msg = `Please write at least ${f.min} characters`;
         else if (f.max && v.length > f.max) msg = `Please keep it under ${f.max} characters`;
-        else if (f.validate) msg = f.validate(v) || '';
+        else if (f.validate) msg = f.validate(v, data) || '';
         showError(f.name, msg);
         if (msg && ok) { form.elements[f.name].focus?.(); }
         if (msg) ok = false;
@@ -117,6 +125,10 @@ const UI = {
         dialog.close();
         dialog.remove();               // gone at once (the "close" event below would only do it a moment later)
       } catch (err) {
+        // the server names the field that is wrong ({ fields: { title: "..." } }): show it under that field
+        for (const [name, msg] of Object.entries(err.fields || {})) {
+          if (form.querySelector(`[data-error-for="${name}"]`)) showError(name, msg);
+        }
         this.toast(err.message || 'Something went wrong', 'error');
       } finally {
         save.disabled = false;

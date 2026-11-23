@@ -32,6 +32,14 @@
   var current = location.pathname.split('/').pop() || '';
   var logo = '../imgs/file_00000000322c8210980e21a958c092d7.png';
 
+  // Logged in: one "Log out" button (js/session.js handles the click). Logged out: Login + Register.
+  var loggedIn = false;
+  try { loggedIn = !!localStorage.getItem('dayora_token'); } catch (e) { /* no storage: treat as logged out */ }
+  var auth = loggedIn
+    ? '<button type="button" class="app-auth_btn app-auth_primary" data-logout>Log out</button>'
+    : '<a href="login.html" class="app-auth_btn app-auth_primary">Login</a>' +
+      '<a href="login.html?mode=register" class="app-auth_btn app-auth_outline">Register</a>';
+
   var links = MENU.map(function (m) {
     var active = m[0] === current;
     return '<a href="' + m[0] + '" class="app-nav_item' + (active ? ' active' : '') + '"' +
@@ -46,10 +54,7 @@
     '<nav class="app-nav" aria-label="Main menu">' + links + '</nav>' +
     '<div class="app-sidebar_bottom">' +
       '<div class="app-divider"></div>' +
-      '<div class="app-auth">' +
-        '<a href="login.html" class="app-auth_btn app-auth_primary">Login</a>' +
-        '<a href="login.html" class="app-auth_btn app-auth_outline">Register</a>' +
-      '</div>' +
+      '<div class="app-auth">' + auth + '</div>' +
       '<button type="button" class="theme-btn" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false">' +
         '<i class="fa-solid fa-moon icon-moon"></i><i class="fa-solid fa-sun icon-sun"></i>' +
         '<span class="theme-label">Dark Mode</span>' +

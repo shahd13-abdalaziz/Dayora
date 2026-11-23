@@ -36,13 +36,14 @@
         <p class="muted">Log in to continue planning your day.</p>
 
         <label>Email
-          <input type="email" placeholder="you@example.com" required>
+          <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
         </label>
 
         <label>Password
-          <input type="password" placeholder="Your password" required>
+          <input type="password" name="password" placeholder="Your password" autocomplete="current-password" required>
         </label>
 
+        <p class="form-error" role="alert"></p>
         <button type="submit" class="btn">Login</button>
       </form>
 
@@ -52,22 +53,26 @@
         <p class="muted">It takes less than a minute.</p>
 
         <label>Full name
-          <input type="text" placeholder="Your name" required>
+          <input type="text" name="name" placeholder="Your name" minlength="2" maxlength="80" autocomplete="name" required>
         </label>
 
         <label>Email
-          <input type="email" placeholder="you@example.com" required>
+          <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
         </label>
 
         <label>Password
-          <input type="password" placeholder="At least 6 characters" minlength="6" required>
+          <input type="password" name="password" placeholder="At least 6 characters" minlength="6" maxlength="72" autocomplete="new-password" required>
         </label>
 
+        <p class="form-error" role="alert"></p>
         <button type="submit" class="btn">Create account</button>
       </form>
 
     </section>
   </main>
 
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/api.js"></script>
+  <script src="../js/auth.js"></script>
 </body>
 </html>
