@@ -114,14 +114,14 @@ document.getElementById("search").addEventListener("input", function (e) {
 // 7) زرار Add Task
 // ==========================================
 document.getElementById("add-btn").addEventListener("click", function () {
-  const title = prompt("اسم المهمة؟");
+  const title = prompt("Task name?");
   if (!title) return;
 
-  const priority = prompt("الأولوية؟ high / medium / low");
-  const date = prompt("الموعد؟ (مثلا Apr 30)");
+  const priority = prompt("Priority? high / medium / low");
+  const date = prompt("Due date? (e.g. Apr 30)");
 
   if (!["high", "medium", "low"].includes(priority) || !date) {
-    alert("فيه قيمة غلط، جربي تاني");
+    alert("Something is wrong, please try again");
     return;
   }
 
