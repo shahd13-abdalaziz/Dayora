@@ -1,0 +1,258 @@
+/* Habits and Notes pages: cards, pop-up forms, buttons, messages. Light first, then dark mode, then small screens.
+   Colours match planner.css / tasks.css. Dark mode = class "dark-mode" on <html> (see js/utils/theme.js). */
+
+/* ========== buttons ========== */
+.btn-primary,
+.btn-ghost,
+.btn-danger {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 99px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-primary { background: #608359; color: #fff; }
+.btn-primary:hover { background: #4f6f49; }
+.btn-ghost { background: #f4f8f1; border-color: #d3e1cf; color: #1f4a33; }
+.btn-ghost:hover { background: #dbe9d6; }
+.btn-danger { background: #d64550; color: #fff; }
+.btn-danger:hover { background: #b9343f; }
+.danger-text { color: #b9343f; }
+button:disabled { cursor: not-allowed; }
+
+.icon-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #5d6f62;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.icon-btn:hover { background: #dbe9d6; color: #1f4a33; }
+
+/* ========== pop-up form ========== */
+dialog.modal {
+  width: min(460px, calc(100vw - 32px));
+  padding: 24px;
+  border: 1px solid #d3e1cf;
+  border-radius: 20px;
+  background: #f4f8f1;
+  color: #1f4a33;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 20px 50px rgba(31, 74, 51, 0.25);
+}
+
+dialog.modal.small { width: min(380px, calc(100vw - 32px)); }
+dialog.modal::backdrop { background: rgba(31, 74, 51, 0.35); }
+dialog.modal h2 { margin: 0 0 16px; font-size: 20px; }
+dialog.modal p { margin: 0 0 8px; color: #5d6f62; font-size: 14px; line-height: 1.5; }
+
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.field > label { font-size: 13px; font-weight: bold; }
+
+.field input[type="text"],
+.field textarea {
+  padding: 10px 12px;
+  border: 1px solid #d3e1cf;
+  border-radius: 12px;
+  background: #fff;
+  color: #1f4a33;
+  font: inherit;
+}
+
+.field input[type="text"]:focus,
+.field textarea:focus { outline: 2px solid #608359; outline-offset: 0; }
+.field textarea { resize: vertical; }
+.field-error { color: #d64550; font-size: 12px; }
+.field-error:empty { display: none; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+.modal-actions.has-extra .danger-text { margin-right: auto; }
+
+/* colour swatches in the note form */
+.swatches { display: flex; gap: 10px; }
+.swatch { cursor: pointer; }
+.swatch input { position: absolute; opacity: 0; pointer-events: none; }
+.swatch span {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  box-shadow: inset 0 0 0 1px rgba(31, 74, 51, 0.2);
+}
+
+.swatch input:checked + span { border-color: #1f4a33; }
+.swatch input:focus-visible + span { outline: 2px solid #608359; outline-offset: 2px; }
+
+/* ========== messages ========== */
+#toasts { position: fixed; right: 20px; bottom: 20px; z-index: 1000; display: flex; flex-direction: column; gap: 8px; }
+
+.toast {
+  max-width: 340px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #1f4a33;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.toast.error { background: #b9343f; }
+
+/* ========== empty page ========== */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 48px 20px;
+  background: #f4f8f1;
+  border: 1px dashed #c9dcc3;
+  border-radius: 20px;
+}
+
+.empty-state i { font-size: 44px; color: #608359; margin-bottom: 12px; }
+.empty-state h2 { margin: 0 0 8px; font-size: 20px; }
+.empty-state p { margin: 0 auto 18px; max-width: 420px; color: #5d6f62; line-height: 1.6; }
+
+/* ========== Habits ========== */
+.stat-card .icon i { font-size: 20px; color: #2e5f44; }
+.habit-list { display: flex; flex-direction: column; gap: 14px; margin-top: 22px; }
+
+.habit {
+  --c: #608359;                                /* the habit's own colour (set from JavaScript) */
+  padding: 18px 20px;
+  background: #f4f8f1;
+  border: 1px solid #d3e1cf;
+  border-left: 6px solid var(--c);
+  border-radius: 16px;
+}
+
+.habit-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.habit-title { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.habit-color { width: 12px; height: 12px; border-radius: 50%; background: var(--c); flex: none; }
+.habit-title h3 { margin: 0; font-size: 17px; overflow-wrap: anywhere; }
+.habit-actions { display: flex; align-items: center; gap: 4px; }
+.streak { margin-right: 8px; font-size: 13px; font-weight: bold; color: #5d6f62; }
+.streak.on { color: #b5651d; }
+
+.week-dots { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+
+.day-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+  border: 1px solid #d3e1cf;
+  border-radius: 12px;
+  background: #fff;
+  color: #1f4a33;
+  font: inherit;
+  cursor: pointer;
+}
+
+.day-dot small { font-size: 11px; color: #5d6f62; }
+.day-dot span { font-size: 15px; font-weight: bold; line-height: 1.4; }
+.day-dot:hover:not(:disabled) { border-color: var(--c); }
+.day-dot.today { box-shadow: 0 0 0 2px var(--c); }
+.day-dot.done { background: var(--c); border-color: var(--c); color: #fff; }
+.day-dot.done small { color: rgba(255, 255, 255, 0.85); }
+.day-dot:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ========== Notes ========== */
+.notes-search { width: 260px; height: 44px; }
+.search i { color: #5d6f62; }
+.notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 22px; }
+
+.note-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 150px;
+  padding: 16px;
+  text-align: left;
+  font: inherit;
+  color: #1f4a33;
+  border: 1px solid rgba(31, 74, 51, 0.12);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.note-card:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(31, 74, 51, 0.15); }
+.note-card h3 { margin: 0; font-size: 16px; overflow-wrap: anywhere; }
+
+.note-card p {
+  margin: 0;
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;                       /* keep the line breaks you typed */
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;                       /* long notes are cut after 5 lines; open it to read everything */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.note-card small { color: rgba(31, 74, 51, 0.65); }
+.c-green  { background: #cfe3cf; }
+.c-yellow { background: #f2e7d2; }
+.c-blue   { background: #d3e8e3; }
+.c-rose   { background: #f4e0d6; }
+.c-gray   { background: #e4e7e2; }
+
+/* ========== dark mode ========== */
+html.dark-mode .btn-ghost { background: #202c25; border-color: #2e3f35; color: #e4ede7; }
+html.dark-mode .btn-ghost:hover { background: #26382e; }
+html.dark-mode .btn-primary { background: #6f9a68; color: #0f1a13; }
+html.dark-mode .btn-primary:hover { background: #7fab78; }
+html.dark-mode .danger-text { color: #ff9aa2; }
+html.dark-mode .icon-btn { color: #9cb0a3; }
+html.dark-mode .icon-btn:hover { background: #2e3f35; color: #fff; }
+
+html.dark-mode dialog.modal { background: #1a241e; color: #e4ede7; border-color: #2e3f35; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); }
+html.dark-mode dialog.modal::backdrop { background: rgba(0, 0, 0, 0.6); }
+html.dark-mode dialog.modal p { color: #9cb0a3; }
+html.dark-mode .field input[type="text"],
+html.dark-mode .field textarea { background: #121815; border-color: #2e3f35; color: #e4ede7; }
+html.dark-mode .field-error { color: #ff8a80; }
+html.dark-mode .swatch input:checked + span { border-color: #e4ede7; }
+
+html.dark-mode .empty-state { background: #1a241e; border-color: #2e3f35; }
+html.dark-mode .empty-state i { color: #6f9a68; }
+html.dark-mode .empty-state p { color: #9cb0a3; }
+
+html.dark-mode .stat-card .icon i { color: #9ac296; }
+html.dark-mode .habit { background: #1a241e; border-color: #26382e; border-left-color: var(--c); }
+html.dark-mode .streak { color: #9cb0a3; }
+html.dark-mode .streak.on { color: #f0b36a; }
+html.dark-mode .day-dot { background: #202c25; border-color: #2e3f35; color: #e4ede7; }
+html.dark-mode .day-dot small { color: #9cb0a3; }
+html.dark-mode .day-dot.done { background: var(--c); border-color: var(--c); color: #fff; }
+html.dark-mode .day-dot.done small { color: rgba(255, 255, 255, 0.85); }
+
+html.dark-mode .search i { color: #9cb0a3; }
+/* the pastel notes stay light cards in dark mode: their dark text stays readable */
+html.dark-mode .note-card { filter: brightness(0.92); border-color: rgba(0, 0, 0, 0.25); }
+
+/* ========== small screens ========== */
+@media (max-width: 900px) {
+  .notes-search { width: auto; flex: 1 1 180px; }
+}
+
+@media (max-width: 600px) {
+  .habit { padding: 14px; }
+  .week-dots { gap: 5px; }
+  .day-dot { padding: 6px 0; border-radius: 10px; }
+  .day-dot span { font-size: 13px; }
+  .notes-grid { grid-template-columns: 1fr; }
+  .tools { width: 100%; }
+  .tools .add-btn { flex: none; }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dayora - Notes</title>
+  <link rel="stylesheet" href="../css/planner.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/app-pages.css">
+  <link rel="stylesheet" href="../css/habits-notes.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="../js/utils/theme.js"></script>
+</head>
+<body>
+  <div class="app">
+
+    <div id="app-sidebar"></div>
+
+    <div class="main">
+
+      <div class="page-head">
+        <div>
+          <h1>Notes</h1>
+          <p>Capture your ideas and thoughts. Click a note to edit it.</p>
+        </div>
+        <div class="tools">
+          <div class="search notes-search">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <input type="text" id="search" placeholder="Search notes..." aria-label="Search notes">
+          </div>
+          <button class="add-btn" id="add-note" type="button">+ New Note</button>
+        </div>
+      </div>
+
+      <!-- the notes (drawn by js/notes.js) -->
+      <div class="notes-grid" id="notes-grid"></div>
+
+    </div>
+  </div>
+
+  <script src="../js/utils/ui.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/notes.js"></script>
+</body>
+</html>

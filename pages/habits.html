@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dayora - Habits</title>
+  <link rel="stylesheet" href="../css/planner.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/app-pages.css">
+  <link rel="stylesheet" href="../css/habits-notes.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="../js/utils/theme.js"></script>
+</head>
+<body>
+  <div class="app">
+
+    <div id="app-sidebar"></div>
+
+    <div class="main">
+
+      <div class="page-head">
+        <div>
+          <h1>Habits</h1>
+          <p>Build better habits for a healthier you. Tick a day when you did it.</p>
+        </div>
+        <div class="tools">
+          <button class="add-btn" id="add-habit" type="button">+ Add Habit</button>
+        </div>
+      </div>
+
+      <!-- the four numbers on top (calculated from the habits) -->
+      <div class="stats">
+        <div class="stat-card">
+          <div class="icon"><i class="fa-solid fa-seedling"></i></div>
+          <div><h3>Habits</h3><p class="number" id="s-total">0</p><p class="note">you are building</p></div>
+        </div>
+        <div class="stat-card">
+          <div class="icon"><i class="fa-regular fa-square-check"></i></div>
+          <div><h3>Done today</h3><p class="number" id="s-today">0</p><p class="note" id="s-today-note">&nbsp;</p></div>
+        </div>
+        <div class="stat-card">
+          <div class="icon"><i class="fa-solid fa-fire"></i></div>
+          <div><h3>Best streak</h3><p class="number" id="s-streak">0</p><p class="note">days in a row</p></div>
+        </div>
+        <div class="stat-card">
+          <div class="icon"><i class="fa-regular fa-calendar-check"></i></div>
+          <div><h3>This week</h3><p class="number" id="s-week">0%</p><p class="note">of your ticks so far</p></div>
+        </div>
+      </div>
+
+      <!-- the habits (drawn by js/habits.js) -->
+      <div class="habit-list" id="habit-list"></div>
+
+    </div>
+  </div>
+
+  <script src="../js/utils/ui.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/habits.js"></script>
+</body>
+</html>
