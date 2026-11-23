@@ -75,7 +75,7 @@ public class AnalyticsController(AppDbContext db) : ControllerBase
         var uid = User.UserId();
         var day = Today(today);
 
-        var user = await db.Users.AsNoTracking().Where(u => u.Id == uid).Select(u => new UserDto(u.Id, u.Name, u.Email)).FirstAsync();
+        var user = await db.Users.AsNoTracking().Where(u => u.Id == uid).Select(u => new UserDto(u.Id, u.Name, u.Email, u.PasswordHash != null)).FirstAsync();
         var open = db.Tasks.AsNoTracking().Where(t => t.UserId == uid && t.Status != TaskState.Done);
 
         var upcoming = await open

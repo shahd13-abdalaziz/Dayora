@@ -315,3 +315,26 @@ a {
     padding: 22px;
   }
 }
+/* ===== Dark mode (switched on the other pages, see js/utils/theme.js) ===== */
+html.dark-mode body { background-color: #121815; color: #e4ede7; }
+html.dark-mode .muted,
+html.dark-mode .or-line { color: #9cb0a3; }
+html.dark-mode .or-line::before,
+html.dark-mode .or-line::after { background: #2e3f35; }
+html.dark-mode .back-home { color: #cfe3cf; }
+html.dark-mode .back-home:hover { color: #9ac296; }
+html.dark-mode .auth-side { background: linear-gradient(145deg, #3f6a4a, #16221a); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45); }
+html.dark-mode .auth-card { background-color: #1a241e; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45); }
+html.dark-mode .auth-card:hover { box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55); }
+html.dark-mode .tabs { background-color: #202c25; }
+html.dark-mode .tabs label { color: #cfe3cf; }
+html.dark-mode .tabs label:hover { background-color: #2a3b30; }
+html.dark-mode #mode-login:checked ~ .tabs label[for="mode-login"],
+html.dark-mode #mode-register:checked ~ .tabs label[for="mode-register"] { background-color: #6f9a68; color: #0f1a13; box-shadow: none; }
+html.dark-mode .auth-form h2 { color: #e4ede7; }
+html.dark-mode .auth-form input { background-color: #121815; border-color: #2e3f35; color: #e4ede7; }
+html.dark-mode .auth-form input::placeholder { color: #7d9186; }
+html.dark-mode .auth-form input:focus { border-color: #6f9a68; box-shadow: 0 0 0 3px rgba(111, 154, 104, 0.3); }
+html.dark-mode .btn { background-color: #6f9a68; color: #0f1a13; box-shadow: none; }
+html.dark-mode .btn:hover { background-color: #7fab78; box-shadow: none; }
+html.dark-mode .form-error { color: #ff8a80; }

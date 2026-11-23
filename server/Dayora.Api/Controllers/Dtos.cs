@@ -18,7 +18,7 @@ public record ChangePasswordInput(
 public record DeleteAccountInput(string? Password, string? ConfirmEmail);
 public record GoogleLoginInput([Required, StringLength(8000)] string Credential);
 
-public record UserDto(int Id, string Name, string Email);
+public record UserDto(int Id, string Name, string Email, bool HasPassword = true);
 public record AuthResult(string Token, UserDto User);
 
 // ----- tasks -----

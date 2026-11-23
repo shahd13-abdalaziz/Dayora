@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dayora - Focus Room</title>
+  <link rel="stylesheet" href="../css/planner.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/app-pages.css">
+  <link rel="stylesheet" href="../css/habits-notes.css">   <!-- buttons, pop-up forms, messages -->
+  <link rel="stylesheet" href="../css/settings-focus.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="../js/utils/theme.js"></script>
+</head>
+<body data-protected>
+  <div class="app">
+
+    <div id="app-sidebar"></div>
+
+    <div class="main">
+
+      <div class="page-head">
+        <div>
+          <h1>Focus Room</h1>
+          <p>One thing at a time. Pick a task, start the timer, and let the rest wait.</p>
+        </div>
+        <div class="tools">
+          <button class="btn-ghost" id="sound-btn" type="button" aria-pressed="true" title="Sound at the end of a session">
+            <i class="fa-solid fa-volume-high"></i> <span>Sound on</span>
+          </button>
+          <a class="btn-ghost fr-link" href="settings.html"><i class="fa-solid fa-sliders"></i> Timer settings</a>
+        </div>
+      </div>
+
+      <div class="fr-layout">
+
+        <!-- the timer -->
+        <section class="fr-card fr-timer" id="timer-card" data-mode="focus" aria-label="Timer">
+
+          <div class="fr-modes" role="tablist" aria-label="Timer type">
+            <button type="button" role="tab" class="fr-mode" data-mode="focus" aria-selected="true">Focus</button>
+            <button type="button" role="tab" class="fr-mode" data-mode="short" aria-selected="false">Short break</button>
+            <button type="button" role="tab" class="fr-mode" data-mode="long" aria-selected="false">Long break</button>
+          </div>
+
+          <div class="fr-ring">
+            <svg viewBox="0 0 260 260" aria-hidden="true">
+              <circle class="fr-ring_track" cx="130" cy="130" r="116"></circle>
+              <circle class="fr-ring_bar" id="ring-bar" cx="130" cy="130" r="116"></circle>
+            </svg>
+            <div class="fr-ring_text">
+              <div class="fr-time" id="time" role="timer" aria-live="off">25:00</div>
+              <div class="fr-status" id="status" aria-live="polite">Ready when you are</div>
+            </div>
+          </div>
+
+          <div class="fr-rounds" id="rounds" aria-label="Focus sessions in this round"></div>
+
+          <div class="field fr-task">
+            <label for="task-select">Working on</label>
+            <select id="task-select"><option value="">No task, just focus</option></select>
+          </div>
+
+          <div class="fr-buttons">
+            <button class="fr-btn fr-btn--main" id="start-btn" type="button"><i class="fa-solid fa-play"></i> <span>Start</span></button>
+            <button class="fr-btn" id="save-btn" type="button" hidden title="Stop now and keep the minutes you already focused"><i class="fa-solid fa-check"></i> <span>Stop &amp; save</span></button>
+            <button class="fr-btn" id="reset-btn" type="button" title="Start this timer again from the beginning"><i class="fa-solid fa-rotate-left"></i> <span>Reset</span></button>
+            <button class="fr-btn" id="skip-btn" type="button" title="Jump to the next timer without saving"><i class="fa-solid fa-forward-step"></i> <span>Skip</span></button>
+          </div>
+          <p class="fr-hint">Tip: press <kbd>Space</kbd> to start or pause.</p>
+        </section>
+
+        <!-- today + history -->
+        <div class="fr-side">
+
+          <section class="fr-card" aria-labelledby="h-today">
+            <h2 id="h-today" class="fr-title">Today</h2>
+            <div class="fr-goal">
+              <div class="fr-goal_top"><strong id="today-min">0 min</strong><span id="today-goal">of 120 min</span></div>
+              <div class="fr-bar" role="progressbar" aria-labelledby="h-today" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="goal-bar">
+                <span id="goal-fill"></span>
+              </div>
+              <p class="fr-goal_note" id="goal-note">Your first session is waiting.</p>
+            </div>
+            <div class="fr-mini">
+              <div><strong id="today-count">0</strong><small>sessions</small></div>
+              <div><strong id="week-min">0</strong><small>min this week</small></div>
+              <div><strong id="best-streak">0</strong><small>day streak</small></div>
+            </div>
+          </section>
+
+          <section class="fr-card" aria-labelledby="h-recent">
+            <h2 id="h-recent" class="fr-title">Recent sessions</h2>
+            <ul class="fr-list" id="recent-list"></ul>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/api.js"></script>
+  <script src="../js/utils/dates.js"></script>
+  <script src="../js/utils/ui.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/session.js"></script>
+  <script src="../js/focus.js"></script>
+</body>
+</html>

@@ -77,7 +77,7 @@ const UI = {
         control = this.el('select', { id, name: f.name },
           f.options.map(([val, label]) => this.el('option', { value: val, text: label, selected: String(val) === String(value) })));
       } else {
-        control = this.el('input', { id, name: f.name, type: f.type === 'date' ? 'date' : 'text', maxlength: f.max, autocomplete: 'off' });
+        control = this.el('input', { id, name: f.name, type: f.type === 'date' ? 'date' : f.type === 'password' ? 'password' : 'text', maxlength: f.max, autocomplete: f.type === 'password' ? 'new-password' : 'off' });
         control.value = value;
       }
       form.append(this.el('div', { class: 'field' },
@@ -103,7 +103,7 @@ const UI = {
       const data = {};
       for (const f of fields) {
         const raw = form.elements[f.name].value;
-        data[f.name] = f.type === 'colors' || f.type === 'select' ? raw : raw.trim();
+        data[f.name] = f.type === 'colors' || f.type === 'select' || f.type === 'password' ? raw : raw.trim();   // a password keeps its spaces
       }
       // 2) check them
       let ok = true;
@@ -139,7 +139,7 @@ const UI = {
     dialog.addEventListener('close', () => dialog.remove());
     document.body.append(dialog);
     dialog.showModal();
-    form.querySelector('input[type="text"], textarea')?.focus();
+    form.querySelector('input[type="text"], input[type="password"], textarea')?.focus();
     return dialog;
   },
 

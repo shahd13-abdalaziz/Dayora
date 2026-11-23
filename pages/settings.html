@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dayora - Settings</title>
+  <link rel="stylesheet" href="../css/planner.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/app-pages.css">
+  <link rel="stylesheet" href="../css/habits-notes.css">   <!-- buttons, pop-up forms, messages -->
+  <link rel="stylesheet" href="../css/settings-focus.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="../js/utils/theme.js"></script>
+</head>
+<body data-protected>
+  <div class="app">
+
+    <div id="app-sidebar"></div>
+
+    <div class="main">
+
+      <div class="page-head">
+        <div>
+          <h1>Settings</h1>
+          <p>Your profile, your focus timer and how Dayora looks.</p>
+        </div>
+      </div>
+
+      <div class="set-grid">
+
+        <!-- profile -->
+        <section class="set-panel" aria-labelledby="h-profile">
+          <header class="set-head">
+            <span class="set-icon"><i class="fa-regular fa-user"></i></span>
+            <div><h2 id="h-profile">Profile</h2><p>The name your tasks and notes are saved under.</p></div>
+          </header>
+
+          <div class="set-who">
+            <div class="set-avatar" id="set-avatar" aria-hidden="true">?</div>
+            <div class="set-who_text"><strong id="set-name-view">&nbsp;</strong><small id="set-email-view">&nbsp;</small></div>
+          </div>
+
+          <form id="profile-form" novalidate>
+            <div class="field">
+              <label for="p-name">Full name</label>
+              <input id="p-name" name="name" type="text" maxlength="80" autocomplete="name">
+              <small class="field-error" data-error-for="name"></small>
+            </div>
+            <div class="field">
+              <label for="p-email">E-mail</label>
+              <input id="p-email" type="text" readonly aria-describedby="p-email-note">
+              <small class="set-hint" id="p-email-note">The e-mail is your login, so it cannot be changed here.</small>
+            </div>
+            <div class="set-actions"><button class="btn-primary" type="submit">Save name</button></div>
+          </form>
+        </section>
+
+        <!-- focus timer -->
+        <section class="set-panel" aria-labelledby="h-timer">
+          <header class="set-head">
+            <span class="set-icon"><i class="fa-regular fa-clock"></i></span>
+            <div><h2 id="h-timer">Focus timer</h2><p>Used by the Focus Room. All times are in minutes.</p></div>
+          </header>
+
+          <form id="timer-form" novalidate>
+            <div class="set-fields">
+              <div class="field">
+                <label for="t-focus">Focus</label>
+                <input id="t-focus" name="focusMinutes" type="number" inputmode="numeric" min="1" max="180" step="1">
+                <small class="field-error" data-error-for="focusMinutes"></small>
+              </div>
+              <div class="field">
+                <label for="t-short">Short break</label>
+                <input id="t-short" name="shortBreakMinutes" type="number" inputmode="numeric" min="1" max="60" step="1">
+                <small class="field-error" data-error-for="shortBreakMinutes"></small>
+              </div>
+              <div class="field">
+                <label for="t-long">Long break</label>
+                <input id="t-long" name="longBreakMinutes" type="number" inputmode="numeric" min="1" max="120" step="1">
+                <small class="field-error" data-error-for="longBreakMinutes"></small>
+              </div>
+              <div class="field">
+                <label for="t-goal">Daily goal</label>
+                <input id="t-goal" name="dailyGoalMinutes" type="number" inputmode="numeric" min="10" max="1440" step="5">
+                <small class="field-error" data-error-for="dailyGoalMinutes"></small>
+              </div>
+            </div>
+            <p class="set-hint">Every 4th focus session is followed by the long break. The goal is how many focus minutes you want each day.</p>
+            <div class="set-actions">
+              <button class="btn-ghost" type="button" id="timer-reset">Back to 25 / 5 / 15 / 120</button>
+              <button class="btn-primary" type="submit">Save timer</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- appearance -->
+        <section class="set-panel" aria-labelledby="h-look">
+          <header class="set-head">
+            <span class="set-icon"><i class="fa-regular fa-sun"></i></span>
+            <div><h2 id="h-look">Appearance</h2><p>The choice is remembered on this device, on every page.</p></div>
+          </header>
+
+          <div class="theme-choice" role="radiogroup" aria-label="Theme">
+            <label class="theme-opt">
+              <input type="radio" name="theme" value="light">
+              <span class="theme-prev theme-prev--light"><i></i><i></i><i></i></span>
+              <span class="theme-name"><i class="fa-regular fa-sun"></i> Light</span>
+            </label>
+            <label class="theme-opt">
+              <input type="radio" name="theme" value="dark">
+              <span class="theme-prev theme-prev--dark"><i></i><i></i><i></i></span>
+              <span class="theme-name"><i class="fa-regular fa-moon"></i> Dark</span>
+            </label>
+          </div>
+        </section>
+
+        <!-- password -->
+        <section class="set-panel" aria-labelledby="h-pass">
+          <header class="set-head">
+            <span class="set-icon"><i class="fa-solid fa-lock"></i></span>
+            <div><h2 id="h-pass">Password</h2><p id="pass-sub">Change the password you log in with.</p></div>
+          </header>
+          <div id="pass-box"></div>
+        </section>
+
+        <!-- data -->
+        <section class="set-panel" aria-labelledby="h-data">
+          <header class="set-head">
+            <span class="set-icon"><i class="fa-solid fa-download"></i></span>
+            <div><h2 id="h-data">Your data</h2><p>Download a copy for Excel or Google Sheets (CSV).</p></div>
+          </header>
+          <div class="set-actions set-actions--left">
+            <button class="btn-ghost" type="button" data-export="tasks">Download tasks</button>
+            <button class="btn-ghost" type="button" data-export="focus">Download focus history</button>
+          </div>
+        </section>
+
+        <!-- danger -->
+        <section class="set-panel set-panel--danger" aria-labelledby="h-danger">
+          <header class="set-head">
+            <span class="set-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <div><h2 id="h-danger">Delete account</h2><p>Removes your account with every task, session, focus record and setting. It cannot be undone.</p></div>
+          </header>
+          <div class="set-actions set-actions--left">
+            <button class="btn-danger" type="button" id="delete-account">Delete my account</button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/api.js"></script>
+  <script src="../js/utils/dates.js"></script>
+  <script src="../js/utils/ui.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/session.js"></script>
+  <script src="../js/settings.js"></script>
+</body>
+</html>

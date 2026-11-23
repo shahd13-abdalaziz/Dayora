@@ -58,6 +58,22 @@ public class GoogleTests : IClassFixture<TestApp>
     }
 
     [Fact]
+    public async Task The_user_says_whether_it_has_a_password_so_Settings_can_hide_the_password_form()
+    {
+        var c = _app.CreateClient();
+        var viaGoogle = await (await Google(c, "sub-haspass|haspass@example.com|true|Has Pass")).Body();
+        Assert.False(viaGoogle.GetProperty("user").GetProperty("hasPassword").GetBoolean());
+
+        c.DefaultRequestHeaders.Authorization = new("Bearer", viaGoogle.GetProperty("token").GetString());
+        var me = await (await c.GetAsync("/api/auth/me")).Body();
+        Assert.False(me.GetProperty("user").GetProperty("hasPassword").GetBoolean());
+
+        var (_, email) = await _app.NewUserAsync();                // an account created with a password
+        var login = await (await _app.CreateClient().PostAsJsonAsync("/api/auth/login", new { email, password = "secret1" })).Body();
+        Assert.True(login.GetProperty("user").GetProperty("hasPassword").GetBoolean());
+    }
+
+    [Fact]
     public async Task Signing_in_again_gives_the_same_account_not_a_second_one()
     {
         var c = _app.CreateClient();

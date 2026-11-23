@@ -17,7 +17,7 @@ public class AuthController(AppDbContext db, TokenService tokens, IConfiguration
 
     private int WorkFactor => config.GetValue("Security:BcryptWorkFactor", 11);
 
-    private static UserDto ToDto(User u) => new(u.Id, u.Name, u.Email);
+    private static UserDto ToDto(User u) => new(u.Id, u.Name, u.Email, u.PasswordHash is not null);
 
     [HttpPost("register"), EnableRateLimiting("auth")]
     public async Task<ActionResult<AuthResult>> Register(RegisterInput input)

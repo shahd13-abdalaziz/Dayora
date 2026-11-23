@@ -45,7 +45,7 @@ That works too (port 5501): the pages talk to the API on `http://localhost:5000`
 dotnet test server/Dayora.Api.Tests
 ```
 
-The 51 tests start the real API against a throw-away LocalDB database (created and deleted per run).
+The 52 tests start the real API against a throw-away LocalDB database (created and deleted per run).
 If you use another SQL Server for the tests: `$env:DAYORA_TEST_SERVER = "."`.
 
 ## Sign in with Google (optional)
@@ -104,7 +104,7 @@ All routes start with `/api`. Everything except `auth/register`, `auth/login`, `
 | `POST /auth/login` `{email,password}` | Log in → `{token,user}` |
 | `GET /auth/config` | `{ googleClientId }`, null when Google sign-in is not set up (the login page uses it to show or hide the button) |
 | `POST /auth/google` `{credential}` | Log in with the token Google gave the browser → `{token,user}` (401 if Google refuses it or the e-mail is not verified, 503 if not set up) |
-| `GET /auth/me` · `PUT /auth/me {name}` | Read / rename the logged-in user |
+| `GET /auth/me` · `PUT /auth/me {name}` | Read / rename the logged-in user (`user` = `{id,name,email,hasPassword}`; `hasPassword` is false for Google-only accounts) |
 | `PUT /auth/password` `{currentPassword,newPassword}` | Change password (400 for a Google-only account) |
 | `DELETE /auth/me` `{password}` or `{confirmEmail}` | Delete the account and all its data (`confirmEmail` only for Google-only accounts) |
 | `GET /tasks?status=&priority=&q=` | My tasks (status `todo\|progress\|done`, priority `high\|medium\|low`) |

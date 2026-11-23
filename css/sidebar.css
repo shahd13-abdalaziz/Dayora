@@ -130,6 +130,10 @@
   justify-content: center;
 }
 
+a.app-user { color: inherit; transition: background-color 0.3s ease; }
+a.app-user:hover { background-color: rgba(87, 118, 83, 0.1); }
+html.dark-mode a.app-user:hover { background-color: rgba(255, 255, 255, 0.05); }
+
 .app-user_text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .app-user_text span { font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .app-user_text small { font-size: 10px; color: #829087; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

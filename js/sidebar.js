@@ -26,6 +26,8 @@
     ['planner.html', 'fa-regular fa-calendar', 'Calendar'],
     ['habits.html', 'fa-solid fa-seedling', 'Habits'],
     ['notes.html', 'fa-regular fa-note-sticky', 'Notes'],
+    ['focus.html', 'fa-solid fa-bullseye', 'Focus Room'],
+    ['settings.html', 'fa-solid fa-gear', 'Settings'],
     ['contact.html', 'fa-regular fa-user', 'Contact-Us'],
   ];
 
@@ -59,11 +61,11 @@
         '<i class="fa-solid fa-moon icon-moon"></i><i class="fa-solid fa-sun icon-sun"></i>' +
         '<span class="theme-label">Dark Mode</span>' +
       '</button>' +
-      '<div class="app-user">' +
+      '<a href="settings.html" class="app-user" title="Your profile and settings">' +
         '<div class="sb-avatar" aria-hidden="true"><i class="fa-solid fa-user"></i></div>' +
         '<div class="app-user_text"><span id="profileName">User Name</span><small id="profileEmail">user@email.com</small></div>' +
         '<span class="app-user_more" aria-hidden="true"><i class="fa-solid fa-ellipsis"></i></span>' +
-      '</div>' +
+      '</a>' +
     '</div>' +
     '<div class="app-sidebar_foot"><i class="fa-solid fa-seedling"></i><p>Small Steps, Big Progress</p><span>&#10084;&#65039;</span></div>';
 
