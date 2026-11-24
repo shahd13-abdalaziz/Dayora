@@ -93,3 +93,25 @@ html.dark-mode .pill.low, html.dark-mode .low { background-color: #23402d; color
   .stat-card { flex-basis: 100%; }
   .week-nav { flex-wrap: wrap; }
 }
+
+/* ========== task cards that now come from the server (Tasks page) ========== */
+.card-actions { display: flex; gap: 2px; }
+.card.overdue { border-color: #d64550; }
+.date.late { color: #d64550; font-weight: bold; }
+.card-desc { margin: 0; font-size: 12px; color: #5d6f62; }
+.cards .empty { padding: 14px; text-align: center; font-size: 13px; color: #5d6f62; }
+
+/* the little round badge with the user's initials (it used to be a picture) */
+.mini-avatar.initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+html.dark-mode .card.overdue { border-color: #d64550; }
+html.dark-mode .card-desc,
+html.dark-mode .cards .empty { color: #9cb0a3; }
+html.dark-mode .date.late { color: #ff8a80; }

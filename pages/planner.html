@@ -7,10 +7,11 @@
   <link rel="stylesheet" href="../css/planner.css">
   <link rel="stylesheet" href="../css/sidebar.css">
   <link rel="stylesheet" href="../css/app-pages.css">
+  <link rel="stylesheet" href="../css/habits-notes.css">   <!-- pop-up forms, buttons and messages -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="../js/utils/theme.js"></script>
 </head>
-<body>
+<body data-protected>
 
   <div class="app">
 
@@ -23,7 +24,7 @@
 
         <div class="search">
           <img src="https://api.iconify.design/lucide/search.svg?color=%235d6f62" alt="search">
-          <input type="text" placeholder="Search sessions, tasks...">
+          <input type="text" id="search" placeholder="Search sessions...">
         </div>
 
         <div class="top-right">
@@ -54,18 +55,18 @@
         <div class="tools">
 
           <div class="week-nav">
-            <button class="arrow">
+            <button class="arrow" id="prev-week">
               <img src="https://api.iconify.design/lucide/chevron-left.svg?color=%231f4a33" alt="previous week">
             </button>
-            <span class="week-label">Oct 18 – 24, 2026</span>
-            <button class="arrow">
+            <span class="week-label" id="week-label">&nbsp;</span>
+            <button class="arrow" id="next-week">
               <img src="https://api.iconify.design/lucide/chevron-right.svg?color=%231f4a33" alt="next week">
             </button>
           </div>
 
-          <button class="today-btn">Today</button>
+          <button class="today-btn" id="today-btn">Today</button>
 
-          <button class="add-btn">
+          <button class="add-btn" id="add-btn">
             <img src="https://api.iconify.design/lucide/plus.svg?color=%23ffffff" alt="">
             Add Task
           </button>
@@ -136,13 +137,13 @@
           <!-- صف الأيام -->
           <div class="days-head">
             <div class="spacer"></div>
-            <div class="day-name"><small>SUN</small><span class="day-num">18</span></div>
-            <div class="day-name"><small>MON</small><span class="day-num today-num">19</span></div>
-            <div class="day-name"><small>TUE</small><span class="day-num">20</span></div>
-            <div class="day-name"><small>WED</small><span class="day-num">21</span></div>
-            <div class="day-name"><small>THU</small><span class="day-num">22</span></div>
-            <div class="day-name"><small>FRI</small><span class="day-num">23</span></div>
-            <div class="day-name"><small>SAT</small><span class="day-num">24</span></div>
+            <div class="day-name"><small>SUN</small><span class="day-num" id="dn-0"></span></div>
+            <div class="day-name"><small>MON</small><span class="day-num" id="dn-1"></span></div>
+            <div class="day-name"><small>TUE</small><span class="day-num" id="dn-2"></span></div>
+            <div class="day-name"><small>WED</small><span class="day-num" id="dn-3"></span></div>
+            <div class="day-name"><small>THU</small><span class="day-num" id="dn-4"></span></div>
+            <div class="day-name"><small>FRI</small><span class="day-num" id="dn-5"></span></div>
+            <div class="day-name"><small>SAT</small><span class="day-num" id="dn-6"></span></div>
           </div>
 
           <!-- الجدول: عمود الساعات + 7 أعمدة (الجلسات بتتحط جواها بـ JavaScript) -->
@@ -163,7 +164,7 @@
             </div>
 
             <div class="day" id="day-0"></div>
-            <div class="day today" id="day-1"></div>
+            <div class="day" id="day-1"></div>
             <div class="day" id="day-2"></div>
             <div class="day" id="day-3"></div>
             <div class="day" id="day-4"></div>
@@ -177,8 +178,12 @@
 
     </div>
   </div>
-
-  <script src="../js/planner.js"></script>
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/api.js"></script>
+  <script src="../js/utils/dates.js"></script>
+  <script src="../js/utils/ui.js"></script>
   <script src="../js/sidebar.js"></script>
+  <script src="../js/session.js"></script>
+  <script src="../js/planner.js"></script>
 </body>
 </html>

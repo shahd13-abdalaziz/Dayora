@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login | Dayora</title>
   <link rel="stylesheet" href="../css/login.css">
+  <script src="../js/utils/theme.js"></script>
 </head>
 
 <body class="auth-page">
 
-  <a href="../index.html" class="back-home">&larr; Back to home</a>
+  <a href="home.html" class="back-home">&larr; Back to home</a>
 
   <main class="auth-layout">
 
@@ -36,13 +37,14 @@
         <p class="muted">Log in to continue planning your day.</p>
 
         <label>Email
-          <input type="email" placeholder="you@example.com" required>
+          <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
         </label>
 
         <label>Password
-          <input type="password" placeholder="Your password" required>
+          <input type="password" name="password" placeholder="Your password" autocomplete="current-password" required>
         </label>
 
+        <p class="form-error" role="alert"></p>
         <button type="submit" class="btn">Login</button>
       </form>
 
@@ -52,22 +54,33 @@
         <p class="muted">It takes less than a minute.</p>
 
         <label>Full name
-          <input type="text" placeholder="Your name" required>
+          <input type="text" name="name" placeholder="Your name" minlength="2" maxlength="80" autocomplete="name" required>
         </label>
 
         <label>Email
-          <input type="email" placeholder="you@example.com" required>
+          <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
         </label>
 
         <label>Password
-          <input type="password" placeholder="At least 6 characters" minlength="6" required>
+          <input type="password" name="password" placeholder="At least 6 characters" minlength="6" maxlength="72" autocomplete="new-password" required>
         </label>
 
+        <p class="form-error" role="alert"></p>
         <button type="submit" class="btn">Create account</button>
       </form>
+
+      <!-- "Continue with Google": js/auth.js shows this only when the server has a Google client id -->
+      <div class="google-section" id="googleSection" hidden>
+        <div class="or-line"><span>or</span></div>
+        <div class="google-button" id="googleButton"></div>
+        <p class="form-error" id="googleError" role="alert"></p>
+      </div>
 
     </section>
   </main>
 
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/api.js"></script>
+  <script src="../js/auth.js"></script>
 </body>
 </html>
