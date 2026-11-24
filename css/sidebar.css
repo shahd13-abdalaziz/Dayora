@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   padding: 28px 22px 16px;
-  overflow-y: auto;
+  overflow: hidden;
   background-color: #e7eee3;
   border-right: 1px solid #dce5d8;
   color: #294b3b;
@@ -36,7 +36,9 @@
 .app-brand img { width: 48px; height: 48px; object-fit: contain; }
 
 /* ---------- menu ---------- */
-.app-nav { display: flex; flex-direction: column; gap: 4px; }
+/* On a short screen the MENU scrolls inside its own box, so Log out, Dark mode and your name at the bottom are never cut off. */
+.app-nav { display: flex; flex-direction: column; gap: 4px; flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; }
+.app-nav_item { flex: none; }
 
 .app-nav_item {
   display: flex;
@@ -164,6 +166,22 @@ html.dark-mode a.app-user:hover { background-color: rgba(255, 255, 255, 0.05); }
   .app-user { margin-top: 10px; padding-top: 10px; }
 }
 
+/* very short screens (a laptop at 150% zoom): squeeze a little more */
+@media (max-height: 620px) {
+  .app-sidebar { padding-top: 12px; padding-bottom: 8px; }
+  .app-brand { margin-bottom: 8px; font-size: 22px; }
+  .app-brand img { width: 36px; height: 36px; }
+  .app-nav { gap: 3px; }
+  .app-nav_item { padding: 8px 14px; font-size: 14px; }
+  .app-nav_item i { font-size: 16px; }
+  .app-sidebar_bottom { padding-top: 6px; }
+  .app-divider { margin-bottom: 8px; }
+  .app-auth_btn { padding: 7px 5px; }
+  .theme-btn { margin-top: 6px; padding: 7px; }
+  .app-user { margin-top: 6px; padding-top: 6px; }
+  .sb-avatar { width: 34px; height: 34px; }
+}
+
 /* ---------- the pages next to the sidebar ---------- */
 .app .main,
 .dashboard-layout .main-content { min-width: 0; }
@@ -217,7 +235,8 @@ html.dark-mode a.app-user:hover { background-color: rgba(255, 255, 255, 0.05); }
     top: 0;
     left: 0;
     bottom: 0;
-    height: auto;
+    height: 100vh;
+    height: 100dvh;            /* exactly the screen, so the menu scrolls inside and Log out stays visible */
     width: 290px;
     max-width: 88vw;
     flex: none;

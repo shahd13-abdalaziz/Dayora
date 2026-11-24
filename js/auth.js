@@ -59,7 +59,7 @@ async function signInWithGoogle(credential) {
 function loadGoogleScript() {
   return new Promise((resolve, reject) => {
     const s = document.createElement('script');
-    s.src = 'https://accounts.google.com/gsi/client';
+    s.src = 'https://accounts.google.com/gsi/client?hl=en';        // hl=en: Google's own texts in English too
     s.async = true;
     s.onload = resolve;
     s.onerror = () => reject(new Error('Could not load Google sign-in (are you online?)'));
@@ -87,6 +87,7 @@ async function setUpGoogle() {
   const box = document.getElementById('googleButton');
   google.accounts.id.renderButton(box, {
     theme: 'outline', size: 'large', shape: 'pill', text: 'continue_with',
+    locale: 'en',                                   // always English, whatever the browser's language is
     width: Math.min(360, box.clientWidth || 320),
   });
 }

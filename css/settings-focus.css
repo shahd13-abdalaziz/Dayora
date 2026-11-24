@@ -322,3 +322,31 @@ html.dark-mode a:focus-visible { outline-color: #9ac296; }
   .btn-danger,
   .fr-btn { transition: none; }
 }
+
+/* ================= Settings: notifications ================= */
+.set-state {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 4px 14px;
+  border-radius: 99px;
+  background: #e4e7e2;
+  color: #5d6f62;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.set-state[data-kind="on"] { background: #dbe9d6; color: #2e5f44; }
+.set-state[data-kind="off"] { background: #f1e4e2; color: #a3302a; }
+
+.set-bullets { margin: 0 0 12px; padding-left: 20px; font-size: 13px; line-height: 1.7; color: #5d6f62; }
+.set-bullets + .set-hint { margin-bottom: 8px; }
+.set-panel--danger { grid-column: 1 / -1; }
+
+html.dark-mode .set-state { background: #26382e; color: #9cb0a3; }
+html.dark-mode .set-state[data-kind="on"] { background: #23402d; color: #a7d6a8; }
+html.dark-mode .set-state[data-kind="off"] { background: #4a2c22; color: #f0b9a2; }
+html.dark-mode .set-bullets { color: #9cb0a3; }
+
+@media (max-width: 900px) {
+  .set-panel--danger { grid-column: auto; }
+}

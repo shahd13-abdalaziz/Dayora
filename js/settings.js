@@ -133,6 +133,59 @@ themeRadios.forEach((r) => r.addEventListener('change', () => Theme.set(r.value 
 new MutationObserver(paintTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 paintTheme();
 
+// ---------- notifications ----------
+function paintNotify() {
+  const state = $('notify-state');
+  const toggle = $('notify-toggle');
+  const test = $('notify-test');
+  const help = $('notify-help');
+  help.hidden = true;
+  toggle.hidden = false;
+  toggle.disabled = false;
+  test.hidden = true;
+
+  if (!Notify.supported) {
+    state.textContent = 'Not available in this browser';
+    state.dataset.kind = 'off';
+    toggle.hidden = true;
+  } else if (Notify.permission() === 'denied') {
+    state.textContent = 'Blocked by the browser';
+    state.dataset.kind = 'off';
+    toggle.disabled = true;
+    help.textContent = 'Click the lock icon next to the address bar, set Notifications to Allow, then reload this page.';
+    help.hidden = false;
+  } else if (Notify.enabled()) {
+    state.textContent = 'On';
+    state.dataset.kind = 'on';
+    toggle.textContent = 'Turn off';
+    toggle.className = 'btn-ghost';
+    test.hidden = false;
+  } else {
+    state.textContent = 'Off';
+    state.dataset.kind = 'off';
+    toggle.textContent = 'Turn on';
+    toggle.className = 'btn-primary';
+  }
+}
+
+$('notify-toggle').addEventListener('click', async () => {
+  if (Notify.enabled()) {
+    Notify.disable();
+  } else {
+    // the browser shows its own "Allow notifications?" question here
+    const result = await Notify.enable();
+    if (result !== 'granted') UI.toast('The browser did not allow notifications', 'error');
+  }
+  paintNotify();
+});
+
+$('notify-test').addEventListener('click', () => {
+  const shown = Notify.show('Dayora 🌱', 'Notifications work. I will tell you when the timer ends and before your sessions.', { tag: 'dayora-test' });
+  UI.toast(shown ? 'Test notification sent' : 'The browser did not show it. Check its notification settings.', shown ? 'ok' : 'error');
+});
+
+paintNotify();
+
 // ---------- password ----------
 function paintPassword() {
   const box = $('pass-box');

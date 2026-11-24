@@ -114,6 +114,25 @@
           </div>
         </section>
 
+        <!-- notifications -->
+        <section class="set-panel" aria-labelledby="h-notify">
+          <header class="set-head">
+            <span class="set-icon"><i class="fa-regular fa-bell"></i></span>
+            <div><h2 id="h-notify">Notifications</h2><p>Pop-ups from your browser, even when Dayora is in another tab.</p></div>
+          </header>
+
+          <div class="set-state" id="notify-state" role="status">&nbsp;</div>
+          <ul class="set-bullets">
+            <li>When a focus session or a break ends</li>
+            <li>10 minutes before a planner session, and when it starts</li>
+          </ul>
+          <p class="set-hint" id="notify-help" hidden></p>
+          <div class="set-actions set-actions--left">
+            <button class="btn-primary" id="notify-toggle" type="button">Turn on</button>
+            <button class="btn-ghost" id="notify-test" type="button" hidden>Send a test</button>
+          </div>
+        </section>
+
         <!-- password -->
         <section class="set-panel" aria-labelledby="h-pass">
           <header class="set-head">
@@ -155,6 +174,8 @@
   <script src="../js/utils/dates.js"></script>
   <script src="../js/utils/ui.js"></script>
   <script src="../js/sidebar.js"></script>
+  <script src="../js/utils/notify.js"></script>
+  <script src="../js/reminders.js"></script>
   <script src="../js/session.js"></script>
   <script src="../js/settings.js"></script>
 </body>

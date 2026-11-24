@@ -81,6 +81,18 @@
   placeholder.replaceWith(aside);
   aside.after(topbar, backdrop);
 
+  // Show who is logged in on EVERY page (Habits and Notes do not load the login code, so do it here).
+  if (loggedIn) {
+    try {
+      var user = JSON.parse(localStorage.getItem('dayora_user'));
+      if (user && user.name) {
+        aside.querySelector('#profileName').textContent = user.name;
+        aside.querySelector('#profileEmail').textContent = user.email || '';
+        aside.querySelector('.sb-avatar').textContent = user.name.trim().split(/\s+/).slice(0, 2).map(function (w) { return w[0]; }).join('').toUpperCase();
+      }
+    } catch (e) { /* damaged data: keep the placeholder text */ }
+  }
+
   function setOpen(open) {
     aside.classList.toggle('open', open);
     backdrop.classList.toggle('show', open);
