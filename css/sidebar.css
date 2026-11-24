@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   padding: 28px 22px 16px;
-  overflow-y: auto;
+  overflow: hidden;
   background-color: #e7eee3;
   border-right: 1px solid #dce5d8;
   color: #294b3b;
@@ -36,7 +36,9 @@
 .app-brand img { width: 48px; height: 48px; object-fit: contain; }
 
 /* ---------- menu ---------- */
-.app-nav { display: flex; flex-direction: column; gap: 4px; }
+/* On a short screen the MENU scrolls inside its own box, so Log out, Dark mode and your name at the bottom are never cut off. */
+.app-nav { display: flex; flex-direction: column; gap: 4px; flex: 1 1 auto; min-height: 0; overflow-y: auto; scrollbar-width: thin; }
+.app-nav_item { flex: none; }
 
 .app-nav_item {
   display: flex;
@@ -162,6 +164,22 @@ html.dark-mode a.app-user:hover { background-color: rgba(255, 255, 255, 0.05); }
   .app-auth_btn { padding: 9px 5px; }
   .theme-btn { margin-top: 9px; padding: 10px; }
   .app-user { margin-top: 10px; padding-top: 10px; }
+}
+
+/* very short screens (a laptop at 150% zoom): squeeze a little more */
+@media (max-height: 620px) and (min-width: 901px) {
+  .app-sidebar { padding-top: 12px; padding-bottom: 8px; }
+  .app-brand { margin-bottom: 8px; font-size: 22px; }
+  .app-brand img { width: 36px; height: 36px; }
+  .app-nav { gap: 1px; }
+  .app-nav_item { padding: 5px 12px; font-size: 13px; }
+  .app-nav_item i { font-size: 15px; }
+  .app-sidebar_bottom { padding-top: 6px; }
+  .app-divider { margin-bottom: 8px; }
+  .app-auth_btn { padding: 7px 5px; }
+  .theme-btn { margin-top: 6px; padding: 7px; }
+  .app-user { margin-top: 6px; padding-top: 6px; }
+  .sb-avatar { width: 34px; height: 34px; }
 }
 
 /* ---------- the pages next to the sidebar ---------- */
