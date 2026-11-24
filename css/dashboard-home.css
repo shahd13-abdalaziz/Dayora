@@ -1,0 +1,298 @@
+/* Dashboard content (pages/dashboard.html). The sidebar has its own file (sidebar.css).
+   Light first, then dark mode (class "dark-mode" on <html>), then small screens. */
+
+.dh {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 28px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ================= hello + Sprout the plant ================= */
+.dh-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 36px;
+  overflow: hidden;
+  border-radius: 28px;
+  color: #fff;
+  background: linear-gradient(135deg, #5b8f65, #1e4a2e);
+  box-shadow: 0 14px 30px rgba(30, 74, 46, 0.25);
+}
+
+/* soft circles, like the login page */
+.dh-hero::before,
+.dh-hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+}
+
+.dh-hero::before { width: 260px; height: 260px; top: -110px; right: 120px; }
+.dh-hero::after { width: 150px; height: 150px; bottom: -70px; left: 38%; }
+
+.dh-hero_text { position: relative; z-index: 1; }
+.dh-date { font-size: 13px; letter-spacing: 0.4px; text-transform: uppercase; color: rgba(255, 255, 255, 0.75); }
+.dh-hero h1 { margin: 6px 0 10px; font-size: 32px; line-height: 1.2; letter-spacing: -0.4px; }
+.dh-joke { max-width: 520px; font-size: 15px; line-height: 1.6; color: rgba(255, 255, 255, 0.9); }
+
+.dh-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+
+.dh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 1px solid #cbd9c8;
+  border-radius: 99px;
+  background: #f5f8f1;
+  color: #294b3b;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.dh-btn:hover { transform: translateY(-2px); background: #e4eee0; box-shadow: 0 8px 16px rgba(30, 74, 46, 0.15); }
+.dh-btn:focus-visible,
+.dh-buddy:focus-visible,
+.dh-row:focus-visible { outline: 2px solid #1e4a2e; outline-offset: 2px; }
+
+.dh-hero .dh-btn { background: rgba(255, 255, 255, 0.14); border-color: rgba(255, 255, 255, 0.35); color: #fff; }
+.dh-hero .dh-btn:hover { background: rgba(255, 255, 255, 0.24); box-shadow: none; }
+.dh-hero .dh-btn--main { background: #fff; border-color: #fff; color: #1e4a2e; }
+.dh-hero .dh-btn--main:hover { background: #f1f7ee; }
+.dh-hero .dh-btn:focus-visible,
+.dh-hero .dh-buddy:focus-visible { outline-color: #fff; }
+
+/* Sprout */
+.dh-buddy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 190px;
+  padding: 0 10px;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.dh-bubble {
+  position: relative;
+  max-width: 220px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: #fff;
+  color: #1e4a2e;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  text-align: center;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.dh-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.dh-plant {
+  display: block;
+  margin-top: 8px;
+  font-size: 84px;
+  line-height: 1;
+  transform-origin: 50% 90%;
+  animation: dh-sway 4s ease-in-out infinite;
+  filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.18));
+}
+
+.dh-plant.bounce { animation: dh-bounce 0.5s ease, dh-sway 4s ease-in-out 0.5s infinite; }
+.dh-buddy_name { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: rgba(255, 255, 255, 0.8); }
+
+@keyframes dh-sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+
+@keyframes dh-bounce {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.25) translateY(-10px); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.dh-error {
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: #fde0de;
+  color: #a3302a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dh-error[hidden] { display: none; }
+
+/* ================= the numbers ================= */
+.dh-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+
+.dh-stat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid #dce5d8;
+  border-radius: 20px;
+  background: #fbfcf8;
+}
+
+.dh-stat_icon {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #e1ecdc;
+  color: #2e5f44;
+  font-size: 19px;
+}
+
+.dh-stat small { display: block; font-size: 13px; color: #5d6f62; }
+.dh-stat strong { display: block; margin: 2px 0; font-size: 26px; line-height: 1.15; color: #294b3b; }
+.dh-stat em { display: block; font-size: 12px; font-style: normal; color: #829087; }
+
+/* ================= lists ================= */
+.dh-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+
+.dh-card {
+  padding: 22px;
+  border: 1px solid #dce5d8;
+  border-radius: 22px;
+  background: #fbfcf8;
+}
+
+.dh-card_head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.dh-card h2 { font-size: 18px; }
+.dh-card_head a { font-size: 13px; font-weight: 600; color: #587653; }
+.dh-card_head a:hover { text-decoration: underline; }
+
+.dh-list { display: flex; flex-direction: column; gap: 8px; list-style: none; }
+
+.dh-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 14px;
+  background: #f1f5ed;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.dh-row:hover { background: #e4eee0; transform: translateX(3px); }
+.dh-row_text { display: flex; flex: 1; flex-direction: column; min-width: 0; }
+.dh-row_text strong { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dh-row_text small { font-size: 12px; color: #5d6f62; }
+.dh-row_text small.late { color: #c0392b; font-weight: 600; }
+
+.dh-dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: #7fab78; }
+.dh-dot.high { background: #d64550; }
+.dh-dot.medium { background: #d6a33a; }
+
+.dh-pill { flex: none; padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 600; text-transform: capitalize; }
+.dh-pill.high { background: #fde0de; color: #a3302a; }
+.dh-pill.medium { background: #f6ecd0; color: #8a6a14; }
+.dh-pill.low { background: #dbe9d6; color: #2e5f44; }
+
+.dh-time { flex: none; min-width: 74px; padding: 4px 8px; border-radius: 10px; background: #dbe9d6; color: #2e5f44; font-size: 12px; font-weight: 600; text-align: center; }
+
+.dh-empty { display: flex; align-items: center; gap: 12px; padding: 18px 14px; border: 1px dashed #c9dcc3; border-radius: 14px; font-size: 14px; line-height: 1.5; color: #5d6f62; }
+.dh-empty i { flex: none; font-size: 22px; color: #7fab78; }
+
+/* ================= the silly card ================= */
+.dh-excuse { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.dh-excuse h2 { margin-bottom: 8px; }
+.dh-excuse h2 i { margin-right: 6px; color: #d6a33a; }
+.dh-excuse p { font-size: 16px; font-style: italic; line-height: 1.6; color: #526b59; }
+.dh-excuse .dh-btn { flex: none; }
+
+/* ================= dark mode ================= */
+html.dark-mode .dh-hero { background: linear-gradient(135deg, #2f5a3d, #16221a); box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4); }
+html.dark-mode .dh-hero .dh-btn--main { background: #6f9a68; border-color: #6f9a68; color: #0f1a13; }
+html.dark-mode .dh-hero .dh-btn--main:hover { background: #7fab78; }
+html.dark-mode .dh-bubble { background: #e4ede7; color: #16221a; }
+html.dark-mode .dh-bubble::after { background: #e4ede7; }
+
+html.dark-mode .dh-btn { background: #202c25; border-color: #2e3f35; color: #e4ede7; }
+html.dark-mode .dh-btn:hover { background: #2a3b30; box-shadow: none; }
+html.dark-mode .dh-btn:focus-visible,
+html.dark-mode .dh-row:focus-visible { outline-color: #9ac296; }
+
+html.dark-mode .dh-error { background: #4a2c22; color: #f0b9a2; }
+
+html.dark-mode .dh-stat,
+html.dark-mode .dh-card { background: #1a241e; border-color: #26382e; }
+html.dark-mode .dh-stat_icon { background: #26382e; color: #9ac296; }
+html.dark-mode .dh-stat small,
+html.dark-mode .dh-row_text small,
+html.dark-mode .dh-empty { color: #9cb0a3; }
+html.dark-mode .dh-stat strong { color: #e4ede7; }
+html.dark-mode .dh-stat em { color: #889c8f; }
+html.dark-mode .dh-card_head a { color: #9ac296; }
+html.dark-mode .dh-row { background: #202c25; }
+html.dark-mode .dh-row:hover { background: #2a3b30; }
+html.dark-mode .dh-row_text small.late { color: #ff8a80; }
+html.dark-mode .dh-pill.high { background: #4a2c22; color: #f0b9a2; }
+html.dark-mode .dh-pill.medium { background: #463b1c; color: #ecd08a; }
+html.dark-mode .dh-pill.low { background: #23402d; color: #a7d6a8; }
+html.dark-mode .dh-time { background: #26382e; color: #9ac296; }
+html.dark-mode .dh-empty { border-color: #2e3f35; }
+html.dark-mode .dh-empty i { color: #6f9a68; }
+html.dark-mode .dh-excuse p { color: #cfe3cf; }
+
+/* ================= small screens ================= */
+@media (max-width: 1000px) {
+  .dh-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 800px) {
+  .dh { padding: 18px 16px 32px; }
+  .dh-hero { grid-template-columns: 1fr; padding: 24px 20px; }
+  .dh-buddy { order: -1; flex-direction: row; align-items: center; justify-content: flex-start; min-width: 0; padding: 0; gap: 14px; }
+  .dh-plant { margin: 0; font-size: 64px; }
+  .dh-bubble::after { left: -6px; bottom: auto; top: 50%; transform: translateY(-50%) rotate(45deg); }
+  .dh-buddy_name { display: none; }
+  .dh-hero h1 { font-size: 26px; }
+  .dh-cols { grid-template-columns: 1fr; }
+  .dh-excuse { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .dh-stats { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dh-plant,
+  .dh-plant.bounce { animation: none; }
+  .dh-btn,
+  .dh-row { transition: none; }
+}

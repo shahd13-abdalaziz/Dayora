@@ -12,18 +12,89 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/dashboard-home.css">
     <script src="../js/utils/theme.js"></script>
 </head>
-<body>
+<body data-protected>
     <div class="dashboard-layout">
         <!-- Sidebar -->
         <div id="app-sidebar"></div>
-        <!-- Empty Main Area -->
+
         <main class="main-content">
-            <!-- Your other pages will be connected here -->
+            <div class="dh">
+
+                <!-- hello + the plant that reacts to your day -->
+                <section class="dh-hero">
+                    <div class="dh-hero_text">
+                        <p class="dh-date" id="dh-date">&nbsp;</p>
+                        <h1 id="dh-hello">Hello!</h1>
+                        <p class="dh-joke" id="dh-joke">Checking what your day looks like...</p>
+                        <div class="dh-actions">
+                            <a class="dh-btn dh-btn--main" href="focus.html"><i class="fa-solid fa-bullseye"></i> Start focusing</a>
+                            <a class="dh-btn" href="tasks.html"><i class="fa-solid fa-plus"></i> Add a task</a>
+                        </div>
+                    </div>
+
+                    <button type="button" class="dh-buddy" id="buddy" aria-label="Sprout, your plant. Tap to hear it talk">
+                        <span class="dh-bubble" id="buddy-say">Hi! Tap me.</span>
+                        <span class="dh-plant" id="buddy-plant" aria-hidden="true">🌱</span>
+                        <span class="dh-buddy_name">Sprout</span>
+                    </button>
+                </section>
+
+                <p class="dh-error" id="dh-error" role="alert" hidden></p>
+
+                <!-- the numbers -->
+                <section class="dh-stats" aria-label="Today in numbers">
+                    <div class="dh-stat">
+                        <span class="dh-stat_icon"><i class="fa-regular fa-square-check"></i></span>
+                        <div><small>Open tasks</small><strong id="s-open">0</strong><em id="s-open-note">&nbsp;</em></div>
+                    </div>
+                    <div class="dh-stat">
+                        <span class="dh-stat_icon"><i class="fa-regular fa-calendar-check"></i></span>
+                        <div><small>Due today</small><strong id="s-today">0</strong><em id="s-today-note">&nbsp;</em></div>
+                    </div>
+                    <div class="dh-stat">
+                        <span class="dh-stat_icon"><i class="fa-solid fa-bullseye"></i></span>
+                        <div><small>Focus today</small><strong id="s-focus">0 min</strong><em id="s-focus-note">&nbsp;</em></div>
+                    </div>
+                    <div class="dh-stat">
+                        <span class="dh-stat_icon"><i class="fa-solid fa-fire"></i></span>
+                        <div><small>Focus streak</small><strong id="s-streak">0</strong><em id="s-streak-note">&nbsp;</em></div>
+                    </div>
+                </section>
+
+                <div class="dh-cols">
+                    <section class="dh-card" aria-labelledby="h-next">
+                        <div class="dh-card_head"><h2 id="h-next">Up next</h2><a href="tasks.html">All tasks</a></div>
+                        <ul class="dh-list" id="next-list"></ul>
+                    </section>
+
+                    <section class="dh-card" aria-labelledby="h-plan">
+                        <div class="dh-card_head"><h2 id="h-plan">Today's plan</h2><a href="planner.html">Calendar</a></div>
+                        <ul class="dh-list" id="plan-list"></ul>
+                    </section>
+                </div>
+
+                <!-- something silly -->
+                <section class="dh-card dh-excuse" aria-labelledby="h-excuse">
+                    <div>
+                        <h2 id="h-excuse"><i class="fa-regular fa-face-grin-tongue-wink"></i> Excuse of the day</h2>
+                        <p id="excuse-text">Loading an excuse nobody will believe...</p>
+                    </div>
+                    <button type="button" class="dh-btn" id="excuse-btn"><i class="fa-solid fa-shuffle"></i> Another one</button>
+                </section>
+
+            </div>
         </main>
     </div>
-    
+
+    <script src="../js/utils/storage.js"></script>
+    <script src="../js/utils/api.js"></script>
+    <script src="../js/utils/dates.js"></script>
+    <script src="../js/utils/ui.js"></script>
     <script src="../js/sidebar.js"></script>
+    <script src="../js/session.js"></script>
+    <script src="../js/dashboard.js"></script>
 </body>
 </html>
