@@ -33,7 +33,7 @@ $env:ConnectionStrings__Default = "Server=localhost,1433;Database=Dayora;User Id
 dotnet run --project server/Dayora.Api
 ```
 
-(or put the same JSON in `server/Dayora.Api/appsettings.Local.json`, which git ignores).
+On a hosting service, put the same settings in a file called `appsettings.Production.json` next to the published app (see "Putting it online" below). That file is git-ignored, so passwords never reach GitHub.
 
 ### Opening the pages with VS Code Live Server
 
@@ -69,7 +69,7 @@ one nothing changes: the page never even contacts Google.
    dotnet run --project server/Dayora.Api
    ```
 
-   or in `server/Dayora.Api/appsettings.Local.json` (git-ignored): `{ "Google": { "ClientId": "123456-abc.apps.googleusercontent.com" } }`.
+   or, on a hosting service, in `appsettings.Production.json`: `{ "Google": { "ClientId": "123456-abc.apps.googleusercontent.com" } }`.
 
 **What happens when someone clicks it:** Google asks them to pick an account and hands the page a signed token.
 The page sends it to `POST /api/auth/google`; the server asks Google whether the token is real, was made for *this*
@@ -78,6 +78,29 @@ client id and has a **verified** e-mail, then logs the person in.
 - First time: an account is created from their Google name and e-mail (it has no password).
 - Same e-mail as an existing password account: the two are linked, the person keeps one account.
 - A Google-only account can never log in with a password; deleting it asks for the account's e-mail instead of a password.
+
+## Putting it online (IIS-style hosting such as MonsterASP.NET)
+
+1. Build the app and copy the website next to it:
+
+   ```powershell
+   dotnet publish server/Dayora.Api -c Release -o ..\Dayora-publish
+   Copy-Item pages, css, js, imgs ..\Dayora-publish -Recurse
+   ```
+
+2. In that `Dayora-publish` folder create `appsettings.Production.json` (never commit it):
+
+   ```json
+   {
+     "ConnectionStrings": { "Default": "<the connection string the host gives you>" },
+     "Jwt": { "Key": "<a long random text, at least 32 characters>" },
+     "Google": { "ClientId": "<optional, see above>" }
+   }
+   ```
+
+3. Upload everything in the folder to the host's website folder (FTP or Web Deploy).
+4. Open the site once: the first start creates the tables by itself.
+5. For "Continue with Google", add the site's address under **Authorized JavaScript origins** in Google Cloud.
 
 ## Settings (all optional)
 
