@@ -37,7 +37,7 @@
 
 /* ---------- menu ---------- */
 /* On a short screen the MENU scrolls inside its own box, so Log out, Dark mode and your name at the bottom are never cut off. */
-.app-nav { display: flex; flex-direction: column; gap: 4px; flex: 1 1 auto; min-height: 0; overflow-y: auto; scrollbar-width: thin; }
+.app-nav { display: flex; flex-direction: column; gap: 4px; flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; }
 .app-nav_item { flex: none; }
 
 .app-nav_item {
@@ -167,13 +167,13 @@ html.dark-mode a.app-user:hover { background-color: rgba(255, 255, 255, 0.05); }
 }
 
 /* very short screens (a laptop at 150% zoom): squeeze a little more */
-@media (max-height: 620px) and (min-width: 901px) {
+@media (max-height: 620px) {
   .app-sidebar { padding-top: 12px; padding-bottom: 8px; }
   .app-brand { margin-bottom: 8px; font-size: 22px; }
   .app-brand img { width: 36px; height: 36px; }
-  .app-nav { gap: 1px; }
-  .app-nav_item { padding: 5px 12px; font-size: 13px; }
-  .app-nav_item i { font-size: 15px; }
+  .app-nav { gap: 3px; }
+  .app-nav_item { padding: 8px 14px; font-size: 14px; }
+  .app-nav_item i { font-size: 16px; }
   .app-sidebar_bottom { padding-top: 6px; }
   .app-divider { margin-bottom: 8px; }
   .app-auth_btn { padding: 7px 5px; }
@@ -235,7 +235,8 @@ html.dark-mode a.app-user:hover { background-color: rgba(255, 255, 255, 0.05); }
     top: 0;
     left: 0;
     bottom: 0;
-    height: auto;
+    height: 100vh;
+    height: 100dvh;            /* exactly the screen, so the menu scrolls inside and Log out stays visible */
     width: 290px;
     max-width: 88vw;
     flex: none;
