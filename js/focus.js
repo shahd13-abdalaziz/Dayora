@@ -210,21 +210,32 @@ async function finish() {
     const next = timer.round >= ROUNDS_BEFORE_LONG_BREAK ? 'long' : 'short';
     setMode(next);
     UI.toast(`Well done! ${minutes} min of focus saved. Time for a ${next === 'long' ? 'long' : 'short'} break.`);
+    Notify.show('Focus session done 🎉', `${minutes} min of focus. Time for a ${next === 'long' ? 'long' : 'short'} break.`, { tag: 'dayora-timer' });
     await logFocus(minutes, taskId, UI.ymd(endedAt));
     await loadStats();
   } else {
     if (finishedMode === 'long') timer.round = 0;
     setMode('focus');
     UI.toast('Break is over. Ready for the next one?');
+    Notify.show('Break is over', 'Ready for the next focus session?', { tag: 'dayora-timer' });
   }
   finishing = false;
 }
 
-setInterval(() => {
+function onTick() {
   if (!timer.running) return;
   renderTimer();
   if (remaining() <= 0) finish();
-}, 250);
+}
+
+// The tick comes from a Web Worker: browsers slow normal timers in a background tab down to about once a minute,
+// and then the "time is up" notification would come late. A worker keeps ticking on time.
+try {
+  const ticker = new Worker(URL.createObjectURL(new Blob(['setInterval(() => postMessage(1), 250)'], { type: 'text/javascript' })));
+  ticker.onmessage = onTick;
+} catch {
+  setInterval(onTick, 250);
+}
 
 // ---------- saving a session (and not losing it when the server is away) ----------
 function readPending() {
