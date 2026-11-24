@@ -87,6 +87,7 @@ async function setUpGoogle() {
   const box = document.getElementById('googleButton');
   google.accounts.id.renderButton(box, {
     theme: 'outline', size: 'large', shape: 'pill', text: 'continue_with',
+    locale: 'en',                                   // always English, whatever the browser's language is
     width: Math.min(360, box.clientWidth || 320),
   });
 }
