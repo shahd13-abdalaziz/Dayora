@@ -86,6 +86,7 @@ html.dark-mode .pill.low, html.dark-mode .low { background-color: #23402d; color
   .week-card .week-top { flex-wrap: wrap; gap: 10px; }
   .chips { flex-wrap: wrap; }
   .week-card .days-head,
+  .week-card .due-row,
   .week-card .grid { min-width: 760px; }
 }
 
@@ -115,3 +116,14 @@ html.dark-mode .card.overdue { border-color: #d64550; }
 html.dark-mode .card-desc,
 html.dark-mode .cards .empty { color: #9cb0a3; }
 html.dark-mode .date.late { color: #ff8a80; }
+/* the "Due" row (planner) */
+html.dark-mode .due-row,
+html.dark-mode .due-day { border-color: #26382e; }
+html.dark-mode .due-label,
+html.dark-mode .due-note { color: #9cb0a3; }
+html.dark-mode .due-note a { color: #9ac296; }
+html.dark-mode .due-task { background: #23402d; color: #a7d6a8; border-left-color: #6f9a68; }
+html.dark-mode .due-task.p-high { background: #4a2c22; color: #f0b9a2; border-left-color: #d64550; }
+html.dark-mode .due-task.p-medium { background: #463b1c; color: #ecd08a; border-left-color: #d6a33a; }
+html.dark-mode .due-task.is-done { background: #202c25; color: #9cb0a3; }
+html.dark-mode .due-task:focus-visible { outline-color: #9ac296; }

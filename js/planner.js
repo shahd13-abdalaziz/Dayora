@@ -5,14 +5,19 @@
 //   POST   /api/sessions                         add one
 //   PUT    /api/sessions/{id}                    edit one
 //   DELETE /api/sessions/{id}                    delete one
+//   GET    /api/tasks                            your tasks: the ones due this week show in the "Due" row (click one to plan it)
 
 const TYPES = [['study', 'Study'], ['project', 'Project'], ['meeting', 'Meeting'], ['review', 'Review'], ['personal', 'Personal']];
-const FIRST_HOUR = 8;      // the grid shows 8 AM ...
-const LAST_HOUR = 19;      // ... to 7 PM
-const ROW = 64;            // pixels per hour (same number as planner.css)
+const DEFAULT_FIRST_HOUR = 8;      // the grid normally shows 8 AM ...
+const DEFAULT_LAST_HOUR = 19;      // ... to 7 PM, and grows by itself if a session is earlier or later than that
+const ROW = 64;                    // pixels per hour (same number as planner.css)
+
+let firstHour = DEFAULT_FIRST_HOUR;
+let lastHour = DEFAULT_LAST_HOUR;
 
 let weekStart = startOfWeek(new Date());   // Sunday of the week on screen
 let sessions = [];
+let tasks = [];            // all your tasks (from the Tasks page); those with a due date this week show in the "Due" row
 let filter = 'all';
 let searchText = '';
 
@@ -32,10 +37,10 @@ function weekLabel() {
   return `${range}, ${end.getFullYear()}`;
 }
 
-// 30-minute choices for the start / end pickers: 8:00 AM ... 7:00 PM
+// 30-minute choices for the start / end pickers: 12:00 AM ... 12:00 AM (the whole day; the server accepts 0 to 24)
 function hourOptions(from, to) {
   const out = [];
-  for (let h = from; h <= to; h += 0.5) out.push([h, Dates.hour(h)]);
+  for (let h = from; h <= to; h += 0.5) out.push([h, h === 24 ? '12:00 AM (midnight)' : Dates.hour(h)]);
   return out;
 }
 
@@ -57,7 +62,26 @@ function renderHeader() {
 }
 
 // ---------- the grid ----------
+/** "8 AM", "12 PM", "12 AM" ... for the hour column on the left. */
+function hourLabel(h) {
+  return `${h % 12 === 0 ? 12 : h % 12} ${h >= 12 && h < 24 ? 'PM' : 'AM'}`;
+}
+
+/** The grid shows 8 AM - 7 PM, but stretches to include any session that is earlier or later (so nothing is hidden). */
+function fitGrid() {
+  firstHour = DEFAULT_FIRST_HOUR;
+  lastHour = DEFAULT_LAST_HOUR;
+  for (const s of sessions) {
+    firstHour = Math.min(firstHour, Math.floor(s.startHour));
+    lastHour = Math.max(lastHour, Math.ceil(s.endHour));
+  }
+  document.querySelector('.hours').replaceChildren(
+    ...Array.from({ length: lastHour - firstHour }, (_, i) => UI.el('span', { text: hourLabel(firstHour + i) })));
+  for (let d = 0; d < 7; d++) document.getElementById(`day-${d}`).style.height = `${(lastHour - firstHour) * ROW}px`;
+}
+
 function renderTable() {
+  fitGrid();
   for (let d = 0; d < 7; d++) {
     const column = document.getElementById(`day-${d}`);
     column.replaceChildren();
@@ -67,20 +91,44 @@ function renderTable() {
       if (s.date !== dateStr) continue;
       if (filter !== 'all' && s.type !== filter) continue;
       if (searchText && !s.title.toLowerCase().includes(searchText)) continue;
-      // The grid only draws 8 AM - 7 PM; clip anything outside it.
-      const start = Math.max(s.startHour, FIRST_HOUR);
-      const end = Math.min(s.endHour, LAST_HOUR);
-      if (end <= start) continue;
+      const start = s.startHour;
+      const end = s.endHour;
 
       column.append(UI.el('div', {
         class: `session ${s.type}`, title: 'Click to edit',
-        style: { top: `${(start - FIRST_HOUR) * ROW + 2}px`, height: `${(end - start) * ROW - 4}px` },
+        style: { top: `${(start - firstHour) * ROW + 2}px`, height: `${(end - start) * ROW - 4}px` },
         onclick: () => openSessionForm(s),
       },
         UI.el('b', { text: s.title }),
         UI.el('span', { text: `${Dates.hour(s.startHour)} – ${Dates.hour(s.endHour)}` })));
     }
   }
+}
+
+// ---------- the "Due" row: tasks with a due date this week ----------
+function renderDue() {
+  for (let d = 0; d < 7; d++) {
+    const cell = document.getElementById(`due-${d}`);
+    const dateStr = UI.ymd(UI.addDays(weekStart, d));
+    // tasks have no type, so a type filter (Study, Meeting...) hides them
+    const due = filter !== 'all' ? [] : tasks.filter((t) =>
+      t.dueDate === dateStr && (!searchText || t.title.toLowerCase().includes(searchText)));
+
+    cell.replaceChildren(...due.map((t) => UI.el('button', {
+      type: 'button',
+      class: `due-task p-${t.priority}${t.status === 'done' ? ' is-done' : ''}`,
+      title: t.status === 'done' ? `${t.title} (done)` : `${t.title}: click to plan a session for it`,
+      'aria-label': `${t.title}, ${t.status === 'done' ? 'done' : 'due, click to plan a session'}`,
+      onclick: () => (t.status === 'done' ? UI.toast('That task is already done') : openSessionForm(null, { title: t.title, date: t.dueDate })),
+    }, t.status === 'done' ? '✓ ' : '', t.title)));
+  }
+
+  // open tasks without a date cannot be placed on a day: say so, with a way to fix it
+  const noDate = tasks.filter((t) => t.status !== 'done' && !t.dueDate).length;
+  const note = document.getElementById('due-note');
+  note.hidden = noDate === 0;
+  note.replaceChildren(`${noDate} open ${noDate === 1 ? 'task has' : 'tasks have'} no due date, so ${noDate === 1 ? 'it is' : 'they are'} not shown here. `,
+    UI.el('a', { href: 'tasks.html', text: 'Add a date on the Tasks page' }), '.');
 }
 
 // ---------- the four cards on top ----------
@@ -100,25 +148,31 @@ async function loadSummary() {
 async function loadWeek() {
   renderHeader();
   try {
-    ({ sessions } = await Api.get(`/sessions?from=${weekFrom()}&to=${weekTo()}`));
+    // the sessions of this week, and your tasks (for the "Due" row)
+    [{ sessions }, { tasks }] = await Promise.all([Api.get(`/sessions?from=${weekFrom()}&to=${weekTo()}`), Api.get('/tasks')]);
   } catch (err) {
     sessions = [];
+    tasks = [];
     UI.toast(err.message, 'error');
   }
   renderTable();
+  renderDue();
   loadSummary();
 }
 
 // ---------- add / edit / delete ----------
-/** session = null -> new one. Otherwise edit that session (with a Delete button). */
-function openSessionForm(session = null) {
-  const hours = hourOptions(FIRST_HOUR, LAST_HOUR);
+/**
+ * session = null -> new one. Otherwise edit that session (with a Delete button).
+ * preset: fills the new form (used when you click a task in the "Due" row: its name and due date).
+ */
+function openSessionForm(session = null, preset = {}) {
+  const hours = hourOptions(0, 24);
   UI.form({
-    title: session ? 'Edit session' : 'New session',
+    title: session ? 'Edit session' : preset.title ? 'Plan a session for this task' : 'New session',
     submit: session ? 'Save changes' : 'Add session',
     values: session
       ? { title: session.title, type: session.type, date: session.date, startHour: session.startHour, endHour: session.endHour }
-      : { type: 'study', date: UI.ymd(), startHour: 9, endHour: 10 },
+      : { type: 'study', date: UI.ymd(), startHour: 9, endHour: 10, ...preset },
     fields: [
       { name: 'title', label: 'Session name', required: true, max: 120 },
       { name: 'type', label: 'Type', type: 'select', options: TYPES },
@@ -161,7 +215,7 @@ document.getElementById('prev-week').addEventListener('click', () => { weekStart
 document.getElementById('next-week').addEventListener('click', () => { weekStart = UI.addDays(weekStart, 7); loadWeek(); });
 document.getElementById('today-btn').addEventListener('click', () => { weekStart = startOfWeek(new Date()); loadWeek(); });
 document.getElementById('add-btn').addEventListener('click', () => openSessionForm());
-document.getElementById('search').addEventListener('input', (e) => { searchText = e.target.value.trim().toLowerCase(); renderTable(); });
+document.getElementById('search').addEventListener('input', (e) => { searchText = e.target.value.trim().toLowerCase(); renderTable(); renderDue(); });
 
 const chips = document.querySelectorAll('.chip');
 chips.forEach((chip) => {
@@ -170,6 +224,7 @@ chips.forEach((chip) => {
     chips.forEach((c) => c.classList.remove('chip-active'));
     chip.classList.add('chip-active');
     renderTable();
+    renderDue();
   });
 });
 

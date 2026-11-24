@@ -486,3 +486,64 @@ input {
 .selected {
   box-shadow: 0 0 0 2px #2e5f44;
 }
+/* ===== "Due" row: tasks that are due this week, above the hour grid ===== */
+.due-row {
+  display: flex;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #d3e1cf;
+}
+
+.due-label {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  padding: 6px 10px 0 0;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #5d6f62;
+}
+
+.due-day {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 30px;
+  padding: 0 4px;
+  border-left: 1px solid #d3e1cf;
+}
+
+.due-task {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px 8px;
+  border: none;
+  border-left: 4px solid #7fab78;
+  border-radius: 8px;
+  background: #dbe9d6;
+  color: #2e5f44;
+  font: inherit;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.due-task:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(31, 74, 51, 0.15); }
+.due-task:focus-visible { outline: 2px solid #1f4a33; outline-offset: 1px; }
+.due-task.p-high { border-left-color: #d64550; background: #fde0de; color: #a3302a; }
+.due-task.p-medium { border-left-color: #d6a33a; background: #f6ecd0; color: #8a6a14; }
+.due-task.is-done { opacity: 0.55; text-decoration: line-through; border-left-color: #9bb59b; background: #e4eee0; color: #5d6f62; cursor: default; }
+
+.due-note { margin: 12px 0 0; font-size: 13px; color: #5d6f62; }
+.due-note[hidden] { display: none; }
+.due-note a { color: #2e5f44; font-weight: bold; text-decoration: underline; }
